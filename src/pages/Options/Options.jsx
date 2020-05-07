@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Options.css';
 
-class Options extends Component {
-  render() {
-    return <div className="OptionsContainer">Options Page</div>;
-  }
-}
+const Title = ({name}) => {
+    return <h5>{name}</h5>;
+};
+
+const Options = () => {
+
+    return (
+        <div className="OptionsContainer">
+            <Title name="option page"/>
+        </div>
+    );
+};
 
 export default Options;

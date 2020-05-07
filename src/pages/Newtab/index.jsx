@@ -1,7 +1,10 @@
 import React from 'react';
-import { render } from 'react-dom';
+import {render} from 'react-dom';
 
-import Newtab from './Newtab';
+import NewTab from './Newtab';
 import './index.css';
+//import weui styles
+import 'weui';
+import 'react-weui/build/packages/react-weui.css';
 
-render(<Newtab />, window.document.querySelector('#app-container'));
+render(<NewTab/>, window.document.querySelector('#app-container'));

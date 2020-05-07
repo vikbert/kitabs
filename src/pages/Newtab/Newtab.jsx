@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from '../../assets/img/logo.svg';
-import './Newtab.css';
+import './Newtab.less';
+import {Article} from 'react-weui';
+import Clock from "./Clock";
+import Bookmark from "./Bookmark";
+import Todo from "./todo/Todo";
 
-const Newtab = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Newtab/Newtab.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const NewTab = () => {
+    return (
+        <div className={'newTab'}>
+            <div className="left">
+                <Bookmark/>
+            </div>
+            <div className="right">
+                <Article className={'clock-container'}>
+                    <div className={'alert'}></div>
+                    <Clock/>
+                </Article>
+                <Article className={'todo-container'}>
+                    <Todo/>
+                </Article>
+            </div>
+        </div>
+    );
 };
 
-export default Newtab;
+export default NewTab;
