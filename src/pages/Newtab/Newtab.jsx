@@ -11,13 +11,15 @@ const NewTab = () => {
             <div className="left">
                 <Bookmark/>
             </div>
+            <div className="middle">
+                <Article className={'todo-container'}>
+                    <Todo/>
+                </Article>
+            </div>
             <div className="right">
                 <Article className={'clock-container'}>
                     <div className={'alert'}></div>
                     <Clock/>
-                </Article>
-                <Article className={'todo-container'}>
-                    <Todo/>
                 </Article>
             </div>
         </div>

@@ -4,11 +4,6 @@ import {saveTodos, loadTodos} from "../../../helpers/chromeStorage";
 import TodoItem from "./TodoItem";
 import TodoFactory from "./TodoFactory";
 
-const testData = [
-    {id: 1, title: 'Extension: complete Todo App', info: '', completed: false, starred: true},
-    {id: 2, title: 'Extension: add "batch Tab" feature', info: '', completed: false, starred: true},
-    {id: 3, title: 'Typescript: 100codingDays start', info: '', completed: false, starred: true},
-];
 const Todo = () => {
     const [newTitle, setNewTitle] = useState('');
     const [todos, setTodos] = useState([]);
@@ -68,6 +63,9 @@ const Todo = () => {
                     </ul>
                 </section>
             )}
+            <footer className={'footer'}>
+                foobar
+            </footer>
         </section>
     );
 };

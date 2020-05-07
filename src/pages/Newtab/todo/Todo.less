@@ -14,6 +14,7 @@ button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 :focus {
   outline: 0;
 }
@@ -27,7 +28,7 @@ button {
   margin: 0 auto;
   background: #fff;
   position: relative;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .todoapp input::-webkit-input-placeholder {
@@ -132,7 +133,7 @@ button {
 
 .todo-list li {
   position: relative;
-  font-size: 30px;
+  font-size: 24px;
   border-bottom: 1px solid #ededed;
 }
 
@@ -194,12 +195,26 @@ button {
   display: block;
   line-height: 1.2;
   transition: color 0.4s;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .todo-list li.completed label {
   color: #d9d9d9;
   text-decoration: line-through;
+}
+
+.todo-list li.starred_todo label {
+  font-weight: 400;
+  color: #1e1e1e;
+}
+
+.todo-list li.starred_todo.completed label {
+  font-weight: 300;
+  color: #d9d9d9;
+}
+
+.todo-list li .starred_completed label {
+  fill: #d8d3d3;
 }
 
 .todo-list li .starred {
@@ -210,23 +225,26 @@ button {
   bottom: 0;
   width: 21px;
   height: 48px;
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 400;
   color: #cc9a9a;
   margin-bottom: 11px;
   transition: color 0.2s ease-out;
   fill: #d74e48;
 }
+.todo-list li .starred_completed {
+  fill: #d8d3d3;
+}
 
 .todo-list li .star {
   cursor: pointer;
   position: absolute;
-  top: 10px;
+  top: 2px;
   right: 8px;
   bottom: 0;
   width: 21px;
   height: 38px;
-  font-size: 30px;
+  font-size: 24px;
   color: #cc9a9a;
   margin-bottom: 11px;
   transition: color 0.2s ease-out;
@@ -398,14 +416,4 @@ html .clear-completed:active {
 
 .filters li a.selected {
   border-color: rgba(175, 47, 47, 0.1);
-}
-
-/*component todo_item*/
-.todo-list li.starred_todo {
-  font-weight: 400;
-  color: #522c2cf7;
-}
-
-.todo-list li .starred_completed {
-  fill: #d8d3d3;
 }
