@@ -1,10 +1,10 @@
 import React from 'react';
-import {getCurrentDate, getCurrentTime} from "../../helpers/date";
+import DateHelper from "../../helpers/DateHelper";
 
 const Clock = () => (
     <div className={'clock'}>
-        <div className={'date'}>{getCurrentTime()}</div>
-        <div className={'time'}>{getCurrentDate()}</div>
+        <div className={'time'}>{DateHelper.getCurrentTime()}</div>
+        <div className={'date'}>{DateHelper.getCurrentDate()}</div>
     </div>
 );
 

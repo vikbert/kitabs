@@ -8,12 +8,6 @@ import Bookmark from "./Bookmark";
 import Todo from "./todo/Todo";
 
 const NewTab = () => {
-    useEffect(() => {
-        chrome.storage.local.get(['kitabs_todos', 'kitabs_bookmarks'], function(result) {
-            console.log(result);
-        });
-    }, []);
-    
     return (
         <div className={'newTab fade-in'}>
             <div className="left">

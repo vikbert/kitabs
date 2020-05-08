@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import './Todo.less';
 import TodoItem from "./TodoItem";
-import TodoFactory from "./TodoFactory";
 import {Article} from 'react-weui';
-import TodoStorage from "../../../helpers/TodoStorage";
+import TodoFactory from "./TodoFactory";
+import TodoStore from "../../../helpers/TodoStore";
 
 const Todo = () => {
-    const [newTitle, setNewTitle] = useState('');
     const [todos, setTodos] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [newTitle, setNewTitle] = useState('');
+    const [filter, setFilter] = useState('all');
+    const [slideOpen, setSlideOpen] = useState(true);
     const [counter, setCounter] = useState({
         all: 0,
         active: 0,
@@ -22,27 +23,37 @@ const Todo = () => {
         setCounter({all, active, completed});
     };
 
-    const toggleSlide = (e) => {
-        setOpen(!open);
+    const toggleSlide = () => {
+        setSlideOpen(!slideOpen);
     };
 
-    const updateStateTitle = (event) => {
+    const handleOnChangeTitle = (event) => {
         const inputValue = event.target.value;
         setNewTitle(inputValue.trimLeft());
     };
 
-    const handlePressEnterKey = (e) => {
-        if (newTitle.length === 0) {
-            return;
-        }
-
-        if (e.key === 'Enter') {
-            setNewTitle('');
-            setTodos([...todos, TodoFactory.create(newTitle)]);
-        }
+    const __saveTodosInStateAndStore = (updatedList) => {
+        setTodos(updatedList);
+        updateCounter(updatedList);
+        TodoStore.saveAll(updatedList);
     };
 
-    const updateTodoInList = (todo) => {
+    const insertNewTodo = (e) => {
+        if (e.key !== 'Enter') {
+            return null;
+        }
+
+        if (newTitle.length === 0) {
+            return null;
+        }
+
+        setNewTitle('');
+
+        const updatedList = [...todos, TodoFactory.create(newTitle)];
+        __saveTodosInStateAndStore(updatedList);
+    };
+
+    const updateTodoCallback = (todo) => {
         let updatedList = [];
         if (todo.title.length === 0) {
             // if title empty, delete this item
@@ -52,18 +63,37 @@ const Todo = () => {
             updatedList = todos.map((element) => (element.id === todo.id) ? todo : element);
         }
 
-        setTodos(updatedList);
+        __saveTodosInStateAndStore(updatedList);
     };
 
-    useEffect(() => {
-        TodoStorage.loadTodos(setTodos);
-    }, []);
+    const deleteAllCompleted = () => {
+        const activeTodos = TodoStore.loadAll().filter((todo) => !todo.completed);
+        __saveTodosInStateAndStore(activeTodos);
+        setFilter('all');
+    };
+
+    const __filterTodosByFilter = (todos) => {
+        if (filter === 'all') {
+            return todos;
+        }
+
+        if (filter === 'active') {
+            return todos.filter((todo) => !todo.completed);
+        }
+
+        if (filter === 'completed') {
+            return todos.filter((todo) => todo.completed);
+        }
+
+        return todos;
+    };
+
+    const starredTodos = __filterTodosByFilter(todos.filter((item) => item.starred));
+    const nonStarredTodos = __filterTodosByFilter(todos.filter((item) => !item.starred));
 
     useEffect(() => {
-        TodoStorage.saveTodos(todos);
-        updateCounter(todos);
-        setOpen(true);
-    }, [todos]);
+        setTodos(TodoStore.loadAll());
+    }, []);
 
     return (
         <>
@@ -74,61 +104,83 @@ const Todo = () => {
                         placeholder={'Plan a new thing ...'}
                         value={newTitle}
                         autoFocus={true}
-                        onChange={updateStateTitle}
-                        onKeyPress={handlePressEnterKey}
+                        onChange={handleOnChangeTitle}
+                        onKeyPress={insertNewTodo}
                         className="new-todo"
                     />
                 </header>
-                {todos && (
-                    <div className="main main--starred">
-                        <input id="toggle-all" type="checkbox" className="toggle-all"/>
-                        <label htmlFor="toggle-all"></label>
+                <div className="main main--starred">
+                    {starredTodos.length > 0 && (
                         <ul className="todo-list">
-                            {todos.filter((item) => item.starred).map((todo) => (
+                            {starredTodos.map((todo) => (
                                 <TodoItem
                                     key={todo.id}
                                     item={todo}
-                                    updateTodoCallback={(todo) => updateTodoInList(todo)}
+                                    updateTodoCallback={(todo) => updateTodoCallback(todo)}
                                 />
                             ))}
                         </ul>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
             <div className="slide">
                 <Article className="slide__header">
                     <input onChange={toggleSlide}
                            id="toggle-slide"
                            type="checkbox"
-                           className="toggle-slide" checked={open}/>
+                           className="toggle-slide" checked={slideOpen}/>
                     <label htmlFor="toggle-slide"
                            className="icon-menu2 icon__medium icon__clickable">
                     </label>
                 </Article>
-                {todos && open && (
-                    <div className="main main--slide">
-                        <ul className="todo-list">
-                            {todos.filter((item) => !item.starred).map((todo) => (
-                                <TodoItem
-                                    key={todo.id}
-                                    item={todo}
-                                    updateTodoCallback={(todo) => updateTodoInList(todo)}
-                                />
-                            ))}
-                        </ul>
-                    </div>
-                )}
+                <div className="main main--slide">
+                    <ul className="todo-list">
+                        {nonStarredTodos.map((todo) => (
+                            <TodoItem
+                                key={todo.id}
+                                item={todo}
+                                updateTodoCallback={(todo) => updateTodoCallback(todo)}
+                            />
+                        ))}
+                    </ul>
+                </div>
                 <Article className="slide__control">
                     <ul className={'filters'}>
-                        <li><a href="#/all">{counter.active} Todos left</a></li>
+                        <li>
+                            <a href="#/all">{counter.active} Todos left</a>
+                        </li>
                     </ul>
                     <ul className={'filters'}>
-                        <li><a href="#/all">All ({counter.all})</a></li>
-                        <li><a href="#/active">Active ({counter.active})</a></li>
-                        <li><a href="#/completed">Completed ({counter.completed})</a></li>
+                        <li>
+                            <a className={filter === 'all' ? 'selected' : undefined}
+                               href="#/all"
+                               onClick={() => setFilter('all')}
+                            >
+                                All ({counter.all})
+                            </a>
+                        </li>
+
+                        <li>
+                            <a className={filter === 'active' ? 'selected' : undefined}
+                               href="#/active"
+                               onClick={() => setFilter('active')}
+                            >
+                                Active ({counter.active})
+                            </a>
+                        </li>
+                        <li>
+                            <a className={filter === 'completed' ? 'selected' : undefined}
+                               href="#/completed"
+                               onClick={() => setFilter('completed')}
+                            >
+                                Completed ({counter.completed})
+                            </a>
+                        </li>
                     </ul>
                     <ul className={'filters'}>
-                        <li><a href="#/completed">Clean all completed</a></li>
+                        <li>
+                            <a href="#/completed" onClick={deleteAllCompleted}>Clean all completed</a>
+                        </li>
                     </ul>
                 </Article>
             </div>
