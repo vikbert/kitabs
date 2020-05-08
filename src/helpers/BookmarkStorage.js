@@ -24,8 +24,9 @@ BookmarkStorage.importBookmarks = (nodes) => {
     };
     
     chrome.storage.local.get({[KEY_BOOKMARKS]: []}, function(result) {
-        // if bookmarks not set yet
+        // if bookmarks already imported
         if (result[KEY_BOOKMARKS].length > 0) {
+            logBookmarks('do nothing, because bookmarks are import already')
             return;
         }
 
