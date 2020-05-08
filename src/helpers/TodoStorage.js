@@ -11,7 +11,7 @@ TodoStorage.saveTodos = (todos) => {
 };
 
 TodoStorage.loadTodos = (stateCallback) => {
-    chrome.storage.local.get(KEY_TODOS, function(result) {
+    chrome.storage.local.get({[KEY_TODOS]: []}, function(result) {
         if (!result) {
             stateCallback([]);
             logTodo('result undefined or empty', result);
