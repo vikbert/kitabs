@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../assets/icon.css';
+import '../../assets/animation.less';
 import './Newtab.less';
 import {Article} from 'react-weui';
 import Clock from "./Clock";
@@ -8,7 +9,7 @@ import Todo from "./todo/Todo";
 
 const NewTab = () => {
     return (
-        <div className={'newTab'}>
+        <div className={'newTab fade-in'}>
             <div className="left">
                 <Bookmark/>
             </div>

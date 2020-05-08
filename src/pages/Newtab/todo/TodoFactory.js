@@ -1,4 +1,4 @@
-const TodoFactory = new Object();
+const TodoFactory = {};
 
 TodoFactory.create = (newTitle) => ({
     id: (new Date()).getTime(),
