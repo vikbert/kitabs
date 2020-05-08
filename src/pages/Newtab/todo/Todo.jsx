@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import './Todo.less';
-import {saveTodos, loadTodos} from "../../../helpers/chromeStorage";
 import TodoItem from "./TodoItem";
 import TodoFactory from "./TodoFactory";
 import {Article} from 'react-weui';
+import TodoStorage from "../../../helpers/TodoStorage";
 
 const Todo = () => {
     const [newTitle, setNewTitle] = useState('');
@@ -57,11 +57,11 @@ const Todo = () => {
     };
 
     useEffect(() => {
-        loadTodos(setTodos);
+        TodoStorage.loadTodos(setTodos);
     }, []);
 
     useEffect(() => {
-        saveTodos(todos);
+        TodoStorage.saveTodos(todos);
         updateCounter(todos);
         setOpen(true);
     }, [todos]);
