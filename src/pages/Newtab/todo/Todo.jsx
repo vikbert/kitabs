@@ -8,7 +8,19 @@ import {Article} from 'react-weui';
 const Todo = () => {
     const [newTitle, setNewTitle] = useState('');
     const [todos, setTodos] = useState([]);
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
+    const [counter, setCounter] = useState({
+        all: 0,
+        active: 0,
+        completed: 0,
+    });
+
+    const updateCounter = (todos) => {
+        const all = todos.length;
+        const completed = todos.filter((element) => element.completed).length;
+        const active = all - completed;
+        setCounter({all, active, completed});
+    };
 
     const toggleSlide = (e) => {
         setOpen(!open);
@@ -32,17 +44,26 @@ const Todo = () => {
     };
 
     const updateTodoInList = (todo) => {
-        const updatedList = todos.map((element) => (element.id === todo.id) ? todo : element);
+        let updatedList = [];
+        if (todo.title.length === 0) {
+            // if title empty, delete this item
+            updatedList = todos.filter((element) => element.id !== todo.id);
+        } else {
+            // if title set, update this item
+            updatedList = todos.map((element) => (element.id === todo.id) ? todo : element);
+        }
+
         setTodos(updatedList);
     };
 
     useEffect(() => {
-        console.log('init load todos');
         loadTodos(setTodos);
     }, []);
 
     useEffect(() => {
         saveTodos(todos);
+        updateCounter(todos);
+        setOpen(true);
     }, [todos]);
 
     return (
@@ -51,12 +72,13 @@ const Todo = () => {
                 <header className="header">
                     <input
                         type="text"
-                        placeholder={'New thing to do ...'}
+                        placeholder={'Plan a new thing ...'}
                         value={newTitle}
                         autoFocus={true}
                         onChange={updateStateTitle}
                         onKeyPress={handlePressEnterKey}
-                        className="new-todo"/>
+                        className="new-todo"
+                    />
                 </header>
                 {todos && (
                     <div className="main main--starred">
@@ -75,13 +97,13 @@ const Todo = () => {
                 )}
             </div>
             <div className="slide">
-                <Article className="slide__control">
+                <Article className="slide__header">
                     <input onChange={toggleSlide}
                            id="toggle-slide"
                            type="checkbox"
                            className="toggle-slide" checked={open}/>
                     <label htmlFor="toggle-slide"
-                           className="icon-menu2 icon--medium icon__clickable">
+                           className="icon-menu2 icon__medium icon__clickable">
                     </label>
                 </Article>
                 {todos && open && (
@@ -97,6 +119,19 @@ const Todo = () => {
                         </ul>
                     </div>
                 )}
+                <Article className="slide__control">
+                    <ul className={'filters'}>
+                        <li><a href="#/all">{counter.active} Todos left</a></li>
+                    </ul>
+                    <ul className={'filters'}>
+                        <li><a href="#/all">All ({counter.all})</a></li>
+                        <li><a href="#/active">Active ({counter.active})</a></li>
+                        <li><a href="#/completed">Completed ({counter.completed})</a></li>
+                    </ul>
+                    <ul className={'filters'}>
+                        <li><a href="#/completed">Clean all completed</a></li>
+                    </ul>
+                </Article>
             </div>
         </>
     );

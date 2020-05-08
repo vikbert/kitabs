@@ -13,7 +13,7 @@
   background: #fff;
   position: relative;
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .slide {
@@ -24,6 +24,9 @@
   font-size: 18px;
   font-family: 'Roboto Condensed', sans-serif;
   min-height: 13px;
+}
+.header {
+  display: flex;
 }
 
 .todoapp input::-webkit-input-placeholder {
@@ -48,12 +51,12 @@
   position: relative;
   margin: 0;
   width: 100%;
-  font-size: 24px;
+  font-size: inherit;
   font-family: inherit;
   font-weight: inherit;
   line-height: 1.4em;
   border: 0;
-  color: #985300;
+  color: #ad5e00;
   padding: 6px;
   border: none;
   box-sizing: border-box;
@@ -81,8 +84,10 @@
 }
 
 .main--slide {
-  max-height: 468px;
+  max-height: 446px;
   overflow: scroll;
+  font-size: 18px;
+  color: #898989;
 }
 
 .toggle-all, .toggle-slide {
@@ -130,6 +135,7 @@
 .todo-list li {
   position: relative;
   font-size: inherit;
+  font-weight: 400;
   border-bottom: 1px solid #ededed;
 }
 
@@ -199,7 +205,6 @@
 }
 
 .todo-list li.starred_todo label {
-  font-weight: 400;
   color: #1e1e1e;
 }
 
@@ -248,23 +253,15 @@
 .slide .todo-list li .star {
   top: 12px;
 }
-
-.slide__control {
+.slide__header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+.weui-article.slide__header{
+  padding: 9px 15px;
+  font-size: 28px;
 }
 
-.icon__clickable {
-  cursor: pointer;
-
-  &:hover {
-    color: darkorange;
-  }
-
-  &:active {
-    color: #8b4600;
-  }
-}
 
 .todo-list li .destroy:hover {
   fill: #d74e48;
@@ -282,3 +279,43 @@
 .todo-list li.editing:last-child {
   margin-bottom: -1px;
 }
+
+.slide__control {
+  display: flex;
+  justify-content: space-between;
+}
+.weui-article.slide__control{
+  padding: 10px 0;
+}
+
+.filters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  right: 0;
+  left: 0;
+}
+
+.filters li {
+  display: inline;
+  margin: 0 2px;
+}
+
+.filters li a {
+  color: #9f9f9f;
+  font-size: 13px;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+
+.filters li a:hover {
+  border: 1px solid rgba(182, 182, 182, 0.2);
+}
+
+.filters li a.selected {
+  border-color: rgba(175, 47, 47, 0.2);
+}
+

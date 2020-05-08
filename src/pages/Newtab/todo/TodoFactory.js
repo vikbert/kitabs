@@ -1,9 +1,7 @@
-import uuid from "uuid";
-
 const TodoFactory = new Object();
 
 TodoFactory.create = (newTitle) => ({
-    id: uuid.v4(),
+    id: (new Date()).getTime(),
     title: newTitle,
     info: null,
     starred: false,
