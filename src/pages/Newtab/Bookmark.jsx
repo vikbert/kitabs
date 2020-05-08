@@ -33,18 +33,22 @@ const Bookmark = () => {
             />
 
             <div className={'list-container'}>
-                <CellsTitle>{`Found ${bookmarks.length} entries`}</CellsTitle>
-                <Cells>
-                    {bookmarks.map((element, index) => (
-                        <Cell onClick={() => loadUrl(element.url)} key={index} access>
-                            <CellBody>
-                                {element.title.substr(0, 50)}
-                            </CellBody>
-                            <CellFooter/>
-                        </Cell>
-                    ))}
-                </Cells>
-                <img className={'bookmark-logo'} src={BookmarkLogo} alt="bookmark"/>
+                <div className="top">
+                    <CellsTitle>{`Found ${bookmarks.length} entries`}</CellsTitle>
+                    <Cells>
+                        {bookmarks.map((element, index) => (
+                            <Cell onClick={() => loadUrl(element.url)} key={index} access>
+                                <CellBody>
+                                    {element.title.substr(0, 50)}
+                                </CellBody>
+                                <CellFooter/>
+                            </Cell>
+                        ))}
+                    </Cells>
+                </div>
+                <div className="bottom">
+                    <img className={'bookmark-logo'} src={BookmarkLogo} alt="bookmark"/>
+                </div>
             </div>
         </div>
     );

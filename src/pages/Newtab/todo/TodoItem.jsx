@@ -1,17 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import classnames from "classnames";
+import TodoTextInput from "./TodoTextInput";
 
 const TodoItem = ({item, updateTodoCallback}) => {
     const [todo, setTodo] = useState(item);
+    const [editing, setEditing] = useState(false);
 
     const toggleChecked = (event) => {
         const newTodo = {...todo, completed: event.target.checked};
         setTodo(newTodo);
     };
-    
+
     const toggleStarred = () => {
         const newTodo = {...todo, starred: !todo.starred};
         setTodo(newTodo);
+    };
+
+    const updateTitle = (newTitle) => {
+        const newTodo = {...todo, title: newTitle};
+        setTodo(newTodo);
+        setEditing(false);
+    };
+    
+    const handleDoubleClick = () => {
+        setEditing(true);
     };
 
     useEffect(() => {
@@ -19,13 +31,15 @@ const TodoItem = ({item, updateTodoCallback}) => {
         updateTodoCallback(todo);
     }, [todo]);
 
-    return (
-        <li className={classnames(
-            'todo',
-            {'starred_todo': todo.starred},
-            {'completed': todo.completed},
-            {'editing': todo.editing},
-        )}>
+    let itemView;
+    if (editing) {
+        itemView = (
+            <TodoTextInput editing={editing}
+                           todoTitle={todo.title}
+                           handleInputFieldUpdate={(newTitle) => updateTitle(newTitle)}/>
+        );
+    } else {
+        itemView = (
             <div className="view">
                 <input className="toggle"
                        type="checkbox"
@@ -33,7 +47,7 @@ const TodoItem = ({item, updateTodoCallback}) => {
                        onChange={toggleChecked}
                        defaultChecked={todo.completed}
                 />
-                <label onDoubleClick={() => null}>{todo.title}</label>
+                <label onDoubleClick={handleDoubleClick}>{todo.title}</label>
                 <span
                     className={todo.starred ? (todo.completed ? 'starred starred_completed' : 'starred') : 'star'}
                     onClick={toggleStarred}
@@ -44,6 +58,17 @@ const TodoItem = ({item, updateTodoCallback}) => {
                     }}
                 />
             </div>
+        );
+    }
+
+    return (
+        <li className={classnames(
+            'todo',
+            {'starred_todo': todo.starred},
+            {'completed': todo.completed},
+            {'editing': editing},
+        )}>
+            {itemView}
         </li>
     );
 };

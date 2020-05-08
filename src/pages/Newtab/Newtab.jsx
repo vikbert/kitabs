@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../assets/style.css';
 import './Newtab.less';
 import {Article} from 'react-weui';
 import Clock from "./Clock";
