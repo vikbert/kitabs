@@ -27,7 +27,6 @@ const TodoItem = ({item, updateTodoCallback}) => {
     };
 
     useEffect(() => {
-        console.log('Todo changed: ', {'completed': todo.completed});
         updateTodoCallback(todo);
     }, [todo]);
 

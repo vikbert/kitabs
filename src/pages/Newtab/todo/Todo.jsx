@@ -24,7 +24,6 @@ const Todo = () => {
 
     const toggleSlide = (e) => {
         setOpen(!open);
-        console.log(open);
     };
 
     const updateStateTitle = (event) => {

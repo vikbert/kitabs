@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../../assets/icon.css';
 import '../../assets/animation.less';
 import './Newtab.less';
@@ -8,6 +8,12 @@ import Bookmark from "./Bookmark";
 import Todo from "./todo/Todo";
 
 const NewTab = () => {
+    useEffect(() => {
+        chrome.storage.local.get(['kitabs_todos', 'kitabs_bookmarks'], function(result) {
+            console.log(result);
+        });
+    }, []);
+    
     return (
         <div className={'newTab fade-in'}>
             <div className="left">

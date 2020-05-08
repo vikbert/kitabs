@@ -1,3 +1,5 @@
+import {logBookmarks} from "./Logger";
+
 const KEY_BOOKMARKS = 'kitabs_bookmarks';
 
 const BookmarkStorage = {};
@@ -29,7 +31,7 @@ BookmarkStorage.importBookmarks = (nodes) => {
 
         __processBookmarks(nodes);
         chrome.storage.local.set({[KEY_BOOKMARKS]: cache}, function() {
-            console.log(`Imported ${cache.length} bookmarks done!`);
+            logBookmarks(`Imported ${cache.length} bookmarks done!`)
         });
     });
 };
