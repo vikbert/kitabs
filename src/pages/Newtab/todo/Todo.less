@@ -1,20 +1,4 @@
 @placeholder-color: #b9b9b9;
-button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  font-size: 100%;
-  vertical-align: baseline;
-  font-family: inherit;
-  font-weight: inherit;
-  color: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 :focus {
   outline: 0;
 }
@@ -31,12 +15,14 @@ button {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 24px;
 }
+
 .slide {
   background: #ffffff;
   width: 688px;
   margin: 0 auto;
   //margin-top: 10px;
   font-size: 18px;
+  font-family: 'Roboto Condensed', sans-serif;
   min-height: 13px;
 
 }
@@ -89,9 +75,16 @@ button {
   z-index: 2;
   border-top: 1px solid #e6e6e6;
 }
+
+.main--starred {
+  max-height: 177px;
+  overflow: hidden;
+  box-shadow: 0 8px 6px -6px #4c4c4c;
+}
+
 .main--slide {
-  transition: margin 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-  padding:5em 3em;
+  max-height: 468px;
+  overflow: scroll;
 }
 
 .toggle-all, .toggle-slide {
@@ -103,7 +96,8 @@ button {
   right: 100%;
   bottom: 100%;
 }
-.toggle-slide:checked + label:before{
+
+.toggle-slide + label:before {
   color: darkorange;
 }
 
@@ -142,7 +136,7 @@ button {
 }
 
 .todo-list li:last-child {
-  box-shadow: 0 8px 6px -6px #929292;
+  box-shadow: 0 8px 6px -6px #4c4c4c;
 }
 
 .todo-list li.editing {
@@ -234,6 +228,7 @@ button {
   transition: color 0.2s ease-out;
   fill: #d74e48;
 }
+
 .todo-list li .starred_completed {
   fill: #d8d3d3;
 }
@@ -251,6 +246,7 @@ button {
   transition: color 0.2s ease-out;
   fill: #e8c2c0;
 }
+
 .slide .todo-list li .star {
   top: 12px;
 }
@@ -262,9 +258,11 @@ button {
 
 .icon__clickable {
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     color: darkorange;
   }
+
   &:active {
     color: #8b4600;
   }

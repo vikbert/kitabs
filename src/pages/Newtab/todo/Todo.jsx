@@ -11,7 +11,8 @@ const Todo = () => {
     const [open, setOpen] = useState(true);
 
     const toggleSlide = (e) => {
-        setOpen(e.target.checked);
+        setOpen(!open);
+        console.log(open);
     };
 
     const updateStateTitle = (event) => {
@@ -58,7 +59,7 @@ const Todo = () => {
                         className="new-todo"/>
                 </header>
                 {todos && (
-                    <div className="main">
+                    <div className="main main--starred">
                         <input id="toggle-all" type="checkbox" className="toggle-all"/>
                         <label htmlFor="toggle-all"></label>
                         <ul className="todo-list">
@@ -75,16 +76,16 @@ const Todo = () => {
             </div>
             <div className="slide">
                 <Article className="slide__control">
-                    <input onClick={toggleSlide}
+                    <input onChange={toggleSlide}
                            id="toggle-slide"
                            type="checkbox"
-                           className="toggle-slide"/>
+                           className="toggle-slide" checked={open}/>
                     <label htmlFor="toggle-slide"
                            className="icon-menu2 icon--medium icon__clickable">
                     </label>
                 </Article>
                 {todos && open && (
-                    <div className="main">
+                    <div className="main main--slide">
                         <ul className="todo-list">
                             {todos.filter((item) => !item.starred).map((todo) => (
                                 <TodoItem
