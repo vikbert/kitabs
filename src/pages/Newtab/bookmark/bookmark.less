@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   width: 498px;
-  height: 100vh;
+  height: auto;
+  background-color: #ffffff;
 
   .search {
     display: flex;
@@ -42,17 +43,14 @@
   }
 
   .list-container {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .bottom {
-      text-align: center;
-    }
+    min-height: 520px;
+  }
+  .bottom {
+    text-align: center;
+  }
+  .bookmark-logo {
+    width: 350px;
   }
 }
 
-.bookmark-logo {
-  width: 350px;
-}
+

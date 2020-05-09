@@ -22,22 +22,13 @@ const Bookmark = () => {
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             const googleQuery = searchText.split(' ').join('+');
-            window.close();
-            window.open(`https://www.google.de/search?q=${googleQuery}`);
+            loadUrl(`https://www.google.de/search?q=${googleQuery}`);
         }
     };
 
     const loadUrl = (url) => {
         window.close();
         window.open(url);
-    };
-
-    const handleOnKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            console.log('enter key ');
-        }
-
-        console.log('key press event');
     };
 
     useEffect(() => {
@@ -73,9 +64,9 @@ const Bookmark = () => {
                         ))}
                     </Cells>
                 </div>
-                <div className="bottom">
-                    <img className={'bookmark-logo'} src={BookmarkLogo} alt="bookmark"/>
-                </div>
+            </div>
+            <div className="bottom">
+                <img className={'bookmark-logo'} src={BookmarkLogo} alt="bookmark"/>
             </div>
         </div>
     );
