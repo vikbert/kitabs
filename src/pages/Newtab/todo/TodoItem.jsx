@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import classnames from "classnames";
 import TodoTextInput from "./TodoTextInput";
+import TodoConfig from "./TodoConfig";
 
-const TodoItem = ({item, updateTodoCallback}) => {
+const TodoItem = ({item, updateTodoCallback, showToptip = () => null, numberStarred = 0}) => {
     const [todo, setTodo] = useState(item);
     const [editing, setEditing] = useState(false);
 
@@ -12,6 +13,11 @@ const TodoItem = ({item, updateTodoCallback}) => {
     };
 
     const toggleStarred = () => {
+        if (numberStarred === TodoConfig.starredLimit) {
+            showToptip();
+            return;
+        }
+
         const newTodo = {...todo, starred: !todo.starred};
         setTodo(newTodo);
     };
@@ -21,7 +27,11 @@ const TodoItem = ({item, updateTodoCallback}) => {
         setTodo(newTodo);
         setEditing(false);
     };
-    
+
+    const removeTodo = () => {
+        setTodo({...todo, title: ''});
+    };
+
     const handleDoubleClick = () => {
         setEditing(true);
     };
@@ -47,6 +57,7 @@ const TodoItem = ({item, updateTodoCallback}) => {
                        defaultChecked={todo.completed}
                 />
                 <label onDoubleClick={handleDoubleClick}>{todo.title}</label>
+                <span className="destroy" onClick={removeTodo}/>
                 <span
                     className={todo.starred ? (todo.completed ? 'starred starred_completed' : 'starred') : 'star'}
                     onClick={toggleStarred}

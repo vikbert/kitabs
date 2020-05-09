@@ -1,13 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
+import classnames from 'classnames';
 import './Todo.less';
 import TodoItem from "./TodoItem";
-import {Article} from 'react-weui';
+import {Article, Toptips} from 'react-weui';
 import TodoFactory from "./TodoFactory";
 import TodoStore from "../../../helpers/TodoStore";
+import TodoConfig from "./TodoConfig";
 
 const Todo = () => {
+    const [searchMode, setSearchMode] = useState(false);
     const [todos, setTodos] = useState([]);
-    const [newTitle, setNewTitle] = useState('');
+    const [newTodo, setNewTodo] = useState('');
     const [filter, setFilter] = useState('all');
     const [slideOpen, setSlideOpen] = useState(true);
     const [counter, setCounter] = useState({
@@ -15,6 +18,8 @@ const Todo = () => {
         active: 0,
         completed: 0,
     });
+    const [showToptips, setShowToptips] = useState(false);
+    const newTodoRef = useRef(null);
 
     const updateCounter = (todos) => {
         const all = todos.length;
@@ -27,9 +32,21 @@ const Todo = () => {
         setSlideOpen(!slideOpen);
     };
 
-    const handleOnChangeTitle = (event) => {
+    const toggleSearchMode = () => {
+        setSearchMode(!searchMode);
+        setNewTodo('');
+    };
+
+    const handleChangeNewTodo = (event) => {
         const inputValue = event.target.value;
-        setNewTitle(inputValue.trimLeft());
+        setNewTodo(inputValue.trimLeft());
+    };
+
+    const handleShowToptip = () => {
+        setShowToptips(true);
+        setTimeout(() => {
+            setShowToptips(false);
+        }, 3000);
     };
 
     const __saveTodosInStateAndStore = (updatedList) => {
@@ -39,17 +56,18 @@ const Todo = () => {
     };
 
     const insertNewTodo = (e) => {
-        if (e.key !== 'Enter') {
+        if (e.key !== 'Enter' || searchMode) {
             return null;
         }
 
-        if (newTitle.length === 0) {
+        if (newTodo.length === 0) {
             return null;
         }
 
-        setNewTitle('');
+        setNewTodo('');
+        setSlideOpen(true);
 
-        const updatedList = [...todos, TodoFactory.create(newTitle)];
+        const updatedList = [TodoFactory.create(newTodo), ...todos];
         __saveTodosInStateAndStore(updatedList);
     };
 
@@ -92,22 +110,47 @@ const Todo = () => {
     const nonStarredTodos = __filterTodosByFilter(todos.filter((item) => !item.starred));
 
     useEffect(() => {
+        if (!searchMode) {
+            return;
+        }
+
+        let matchedList = [];
+        if (newTodo.length === 0) {
+            setTodos(TodoStore.loadAll());
+        } else if (newTodo.length > 2) {
+   
+            
+        }
+    }, [newTodo]);
+
+    useEffect(() => {
+        newTodoRef.current.focus();
+    }, [searchMode]);
+
+    useEffect(() => {
         setTodos(TodoStore.loadAll());
     }, []);
+    
 
     return (
         <>
             <div className="todoapp">
+                <Toptips show={showToptips} type={'warn'}>
+                    Max. 3x starred Todos !!!
+                </Toptips>
                 <header className="header">
+                    <span className={searchMode ? "icon-search1 icon-search1--header" : "icon-plus1"}/>
                     <input
-                        type="text"
-                        placeholder={'Plan a new thing ...'}
-                        value={newTitle}
+                        ref={newTodoRef}
                         autoFocus={true}
-                        onChange={handleOnChangeTitle}
+                        type="text"
+                        placeholder={searchMode ? 'Type for search ...' : 'Add a new todo ...'}
+                        value={newTodo}
+                        onChange={handleChangeNewTodo}
                         onKeyPress={insertNewTodo}
                         className="new-todo"
                     />
+                    <span className={searchMode ? "icon-x" : "icon-search1"} onClick={toggleSearchMode}/>
                 </header>
                 <div className="main main--starred">
                     {starredTodos.length > 0 && (
@@ -130,24 +173,27 @@ const Todo = () => {
                            type="checkbox"
                            className="toggle-slide" checked={slideOpen}/>
                     <label htmlFor="toggle-slide"
-                           className="icon-menu2 icon__medium icon__clickable">
+                           className="icon-menu icon__medium icon__clickable">
                     </label>
                 </Article>
                 <div className="main main--slide">
                     <ul className="todo-list">
-                        {nonStarredTodos.map((todo) => (
+                        {slideOpen && nonStarredTodos.map((todo) => (
                             <TodoItem
                                 key={todo.id}
                                 item={todo}
                                 updateTodoCallback={(todo) => updateTodoCallback(todo)}
+                                showToptip={handleShowToptip}
+                                numberStarred={starredTodos.length}
                             />
                         ))}
                     </ul>
                 </div>
-                <Article className="slide__control">
+                <Article
+                    className={classnames("slide__control", {"shadow": nonStarredTodos.length > TodoConfig.visibleTodosLimit})}>
                     <ul className={'filters'}>
                         <li>
-                            <a href="#/all">{counter.active} Todos left</a>
+                            <a href="#/all">{counter.active} items left</a>
                         </li>
                     </ul>
                     <ul className={'filters'}>

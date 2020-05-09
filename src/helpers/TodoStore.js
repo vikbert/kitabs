@@ -1,21 +1,34 @@
 import {logTodo} from "./Logger";
 
 const store = require('store');
+const TodoStore = {
+    key: 'kitabs_todos',
+};
 
-const KEY_TODOS = 'kitabs_todos';
-
-const TodoStore = {};
 TodoStore.saveAll = (todos) => {
-    store.set(KEY_TODOS, todos);
+    store.set(TodoStore.key, todos);
 };
 
 TodoStore.loadAll = () => {
-    logTodo('load todos from local storage');
-    return store.get(KEY_TODOS, []);
+    const orderById = (a, b) => {
+        let compared = 0;
+        if (b.id > a.id) {
+            compared = 1;
+        } else if (b.id < a.id) {
+            compared = -1;
+        }
+
+        return compared;
+    };
+
+    const todos = store.get(TodoStore.key, []);
+    logTodo('load todos from local storage', todos);
+
+    return todos.sort(orderById);
 };
 
 TodoStore.removeAll = () => {
-    return store.remove(KEY_TODOS);
+    return store.remove(TodoStore.key);
 };
 
 export default TodoStore;

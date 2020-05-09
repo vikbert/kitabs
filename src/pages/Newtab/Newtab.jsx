@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
-import '../../assets/icon.css';
+import React from 'react';
+import '../../assets/style.css';
 import '../../assets/animation.less';
+import '../../assets/overwrite.less';
 import './Newtab.less';
 import {Article} from 'react-weui';
 import Clock from "./Clock";
@@ -20,7 +21,6 @@ const NewTab = () => {
             </div>
             <div className="right">
                 <Article className={'clock-container'}>
-                    <div className={'alert'}></div>
                     <Clock/>
                 </Article>
             </div>
