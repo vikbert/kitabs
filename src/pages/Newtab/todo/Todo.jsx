@@ -4,7 +4,7 @@ import './Todo.less';
 import TodoItem from "./TodoItem";
 import {Article, Toptips} from 'react-weui';
 import TodoFactory from "./TodoFactory";
-import TodoStore from "../../../helpers/TodoStore";
+import todoStore from "../../../helpers/TodoStore";
 import TodoConfig from "./TodoConfig";
 
 const Todo = () => {
@@ -52,7 +52,7 @@ const Todo = () => {
     const __saveTodosInStateAndStore = (updatedList) => {
         setTodos(updatedList);
         updateCounter(updatedList);
-        TodoStore.saveAll(updatedList);
+        todoStore.saveAll(updatedList);
     };
 
     const insertNewTodo = (e) => {
@@ -85,7 +85,7 @@ const Todo = () => {
     };
 
     const deleteAllCompleted = () => {
-        const activeTodos = TodoStore.loadAll().filter((todo) => !todo.completed);
+        const activeTodos = todoStore.loadAll().filter((todo) => !todo.completed);
         __saveTodosInStateAndStore(activeTodos);
         setFilter('all');
     };
@@ -116,7 +116,7 @@ const Todo = () => {
 
         let matchedList = [];
         if (newTodo.length === 0) {
-            setTodos(TodoStore.loadAll());
+            setTodos(todoStore.loadAll());
         } else if (newTodo.length > 2) {
    
             
@@ -128,7 +128,7 @@ const Todo = () => {
     }, [searchMode]);
 
     useEffect(() => {
-        setTodos(TodoStore.loadAll());
+        setTodos(todoStore.loadAll());
     }, []);
     
 
