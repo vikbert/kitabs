@@ -181,6 +181,7 @@ const Todo = () => {
                                     key={todos[key].id}
                                     item={todos[key]}
                                     updateTodoCallback={(todo) => callbackUpdateTodo(todo)}
+                                    deleteTodoCallback={(todo) => callbackDeleteTodo(todo)}
                                 />
                             ))}
                         </ul>
