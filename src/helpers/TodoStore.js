@@ -31,5 +31,15 @@ todoStore.removeAll = () => {
     return store.remove(todoStore.key);
 };
 
+// TODO: switch array => object
+
+todoStore.loadTodos = () => {
+    return store.get(todoStore.key, {});
+};
+
+todoStore.saveTodos = (todos) => {
+    store.set(todoStore.key, todos);
+};
+
 export default todoStore;
 

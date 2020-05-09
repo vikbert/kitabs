@@ -3,7 +3,7 @@ import classnames from "classnames";
 import TodoTextInput from "./TodoTextInput";
 import TodoConfig from "./TodoConfig";
 
-const TodoItem = ({item, updateTodoCallback, showToptip = () => null, numberStarred = 0}) => {
+const TodoItem = ({item, updateTodoCallback, deleteTodoCallback, showToptip = () => null, numberStarred = 0}) => {
     const [todo, setTodo] = useState(item);
     const [editing, setEditing] = useState(false);
 
@@ -24,12 +24,12 @@ const TodoItem = ({item, updateTodoCallback, showToptip = () => null, numberStar
 
     const updateTitle = (newTitle) => {
         const newTodo = {...todo, title: newTitle};
-        setTodo(newTodo);
         setEditing(false);
+        setTodo(newTodo);
     };
 
     const removeTodo = () => {
-        setTodo({...todo, title: ''});
+        deleteTodoCallback(todo);
     };
 
     const handleDoubleClick = () => {
