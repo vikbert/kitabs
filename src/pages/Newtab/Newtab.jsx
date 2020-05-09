@@ -5,7 +5,7 @@ import '../../assets/overwrite.less';
 import './Newtab.less';
 import {Article} from 'react-weui';
 import Clock from "./Clock";
-import Bookmark from "./Bookmark";
+import Bookmark from "./bookmark/Bookmark";
 import Todo from "./todo/Todo";
 
 const NewTab = () => {

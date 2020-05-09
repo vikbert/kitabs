@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {SearchBar, Cells, CellsTitle, Cell, CellBody, CellFooter} from 'react-weui';
-import BookmarkLogo from '../../assets/img/bookmark.png';
-import BookmarkStorage from "../../helpers/BookmarkStorage";
+import './bookmark.less';
+import {Cells, CellsTitle, Cell, CellBody, CellFooter} from 'react-weui';
+import BookmarkLogo from '../../../assets/img/bookmark.png';
+import BookmarkStorage from "../../../helpers/BookmarkStorage";
 
 const Bookmark = () => {
     const [bookmarks, setBookmarks] = useState([]);
-    const handleChangeSearchText = (text) => {
-        const searchString = text.trim().toLowerCase();
+    const [searchText, setSearchText] = useState('');
+
+    const handleChangeSearch = (event) => {
+        const searchString = event.target.value.trimLeft().toLowerCase();
+        setSearchText(searchString);
 
         if (searchString.length >= 2) {
             BookmarkStorage.filterBookmarks(searchString, setBookmarks);
@@ -15,9 +19,25 @@ const Bookmark = () => {
         }
     };
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            const googleQuery = searchText.split(' ').join('+');
+            window.close();
+            window.open(`https://www.google.de/search?q=${googleQuery}`);
+        }
+    };
+
     const loadUrl = (url) => {
         window.close();
         window.open(url);
+    };
+
+    const handleOnKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            console.log('enter key ');
+        }
+
+        console.log('key press event');
     };
 
     useEffect(() => {
@@ -26,11 +46,18 @@ const Bookmark = () => {
 
     return (
         <div className={'bookmark'}>
-            <SearchBar
-                lang={{cancel: 'Cancel'}}
-                onChange={handleChangeSearchText}
-                placeholder={'Search in bookmarks'}
-            />
+            <div className="search">
+                <div className="input-wrapper">
+                    <span className="icon-search1"/>
+                    <input type="text"
+                           placeholder={'Search in Bookmark and web'}
+                           className={'search'}
+                           value={searchText}
+                           onChange={handleChangeSearch}
+                           onKeyPress={handleKeyPress}
+                    />
+                </div>
+            </div>
 
             <div className={'list-container'}>
                 <div className="top">
