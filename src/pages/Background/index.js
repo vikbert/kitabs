@@ -1,6 +1,7 @@
 import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
-import BookmarkStorage from "../../helpers/BookmarkStorage";
+import BookmarkStore from "../../helpers/BookmarkStore";
+import {logBookmarks} from "../../helpers/Logger";
 
 chrome.browserAction.onClicked.addListener((tab) => {
     alert('clicked');
@@ -8,12 +9,13 @@ chrome.browserAction.onClicked.addListener((tab) => {
 
 chrome.runtime.onMessage.addListener((request) => {
     if (request.importBookmarks) {
-        chrome.bookmarks.getTree(BookmarkStorage.importBookmarks);
+        logBookmarks('event listener: init import bookmarks');
+        chrome.bookmarks.getTree(BookmarkStore.importBookmarks);
     }
 
     return false;
 });
 
-chrome.bookmarks.onCreated.addListener(BookmarkStorage.removeBookmarks);
-chrome.bookmarks.onRemoved.addListener(BookmarkStorage.removeBookmarks);
-chrome.bookmarks.onChanged.addListener(BookmarkStorage.removeBookmarks);
+chrome.bookmarks.onCreated.addListener(BookmarkStore.removeBookmarks);
+chrome.bookmarks.onRemoved.addListener(BookmarkStore.removeBookmarks);
+chrome.bookmarks.onChanged.addListener(BookmarkStore.removeBookmarks);

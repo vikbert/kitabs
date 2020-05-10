@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './bookmark.less';
 import {Cells, CellsTitle, Cell, CellBody, CellFooter} from 'react-weui';
 import BookmarkLogo from '../../../assets/img/bookmark.png';
-import BookmarkStorage from "../../../helpers/BookmarkStorage";
+import BookmarkStore from "../../../helpers/BookmarkStore";
 
 const Bookmark = ({active}) => {
     const [bookmarks, setBookmarks] = useState([]);
@@ -13,7 +13,7 @@ const Bookmark = ({active}) => {
         setSearchText(searchString);
 
         if (searchString.length >= 2) {
-            BookmarkStorage.filterBookmarks(searchString, setBookmarks);
+            BookmarkStore.filterBookmarks(searchString, setBookmarks);
         } else {
             setBookmarks([]);
         }
