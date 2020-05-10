@@ -1,10 +1,18 @@
 @placeholder-color: #b9b9b9;
+
 :focus {
   outline: 0;
 }
 
 .hidden {
   display: none;
+}
+
+.todo-container {
+  margin-top: 70px;
+  @media @tiny {
+    margin-top: 10px;
+  }
 }
 
 .todoapp {
@@ -29,9 +37,11 @@
 .header {
   display: flex;
 }
+
 .header [class^='icon-'], [class*=' icon-'] {
   padding: 19px 10px;
 }
+
 .header .icon-search1 {
   cursor: pointer;
   color: #ffffff;
@@ -42,13 +52,15 @@
   color: #cc9a9a;
 }
 
-.header:hover .icon-search1{
+.header:hover .icon-search1 {
   color: #cc9a9a;
 }
+
 .header .icon-plus1 {
   cursor: pointer;
   color: #cc9a9a;
 }
+
 .header .icon-x {
   cursor: pointer;
   color: #cc9a9a;
@@ -166,7 +178,7 @@
 }
 
 .todo-list li:last-child {
-  
+
 }
 
 .todo-list li.editing {

@@ -1,5 +1,5 @@
 import React from 'react';
-import DateHelper from "../../helpers/DateHelper";
+import DateHelper from "../../../helpers/DateHelper";
 
 const Clock = () => (
     <div className={'clock'}>

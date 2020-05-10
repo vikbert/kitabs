@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import './bookmark.less';
 import {Cells, CellsTitle, Cell, CellBody, CellFooter} from 'react-weui';
 import BookmarkLogo from '../../../assets/img/bookmark.png';
 import BookmarkStore from "../../../helpers/BookmarkStore";
@@ -50,7 +49,7 @@ const Bookmark = ({active}) => {
                 </div>
             </div>
 
-            <div className={'list-container'}>
+            <div className={'list-container'} style={{display: bookmarks.length ? "block" : "none"}}>
                 <div className="top">
                     <CellsTitle>{`Found ${bookmarks.length} entries`}</CellsTitle>
                     <Cells>

@@ -1,10 +1,8 @@
-
 .bookmark {
   display: flex;
   flex-direction: column;
-  width: 498px;
   height: auto;
-  background-color: #ffffff;
+  //background-color: #ffffff;
 
   .search {
     display: flex;
@@ -44,9 +42,16 @@
 
   .list-container {
     min-height: 520px;
+    @media @tiny {
+      min-height: auto;
+    }
   }
+  
   .bottom {
     text-align: center;
+    @media @tiny  {
+      display: none;
+    }
   }
   .bookmark-logo {
     width: 350px;

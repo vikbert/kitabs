@@ -1,10 +1,6 @@
 import React, {useState} from 'react';
-import '../../assets/style.css';
-import '../../assets/animation.less';
-import '../../assets/overwrite.less';
-import './Newtab.less';
 import {Article} from 'react-weui';
-import Clock from "./Clock";
+import Clock from "./clock/Clock";
 import Bookmark from "./bookmark/Bookmark";
 import Note from "./note";
 import Todo from "./todo";

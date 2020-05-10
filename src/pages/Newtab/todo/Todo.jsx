@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
 import classnames from 'classnames';
-import './todo.less';
 import TodoItem from "./TodoItem";
 import {Article, Toptips} from 'react-weui';
 import TodoFactory from "./TodoFactory";
