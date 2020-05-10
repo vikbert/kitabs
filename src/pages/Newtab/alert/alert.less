@@ -1,0 +1,36 @@
+.weui-article.alert-container {
+  padding-bottom: 0;
+}
+
+.alert-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  @media only screen and (min-width: @screen-md-min) {
+    width: 700px;
+    
+  }
+}
+
+.button-alert {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.57);
+  color: #1e1e1e;
+  font-size: 18px;
+  &:hover {
+    color: #ffffff;
+    background-color: rgba(255, 140, 0, 0.75);
+  }
+  .icon {
+    padding: 5px 5px 5px 0;
+  }
+}
+.timer-display {
+  font-size: 5rem;
+  font-weight: bold;
+  color: darkorange;
+}

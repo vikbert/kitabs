@@ -12,12 +12,6 @@ const FILTER = {
     completed: 'completed',
 };
 
-const INIT_COUNTER = {
-    all: 0,
-    active: 0,
-    completed: 0,
-};
-
 const INIT_TOGGLE = {
     searchActive: false,
     slideActive: true,

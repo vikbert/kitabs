@@ -5,6 +5,7 @@ import Bookmark from "./bookmark/Bookmark";
 import Note from "./note";
 import Todo from "./todo";
 import Header from "./header";
+import Alert from "./alert/Alert";
 
 const NewTab = () => {
     const [visibility, setVisibility] = useState({
@@ -26,6 +27,9 @@ const NewTab = () => {
                 {visibility.note && <Note active={visibility.note}/>}
             </div>
             <div className="middle">
+                <Article className={'alert-container'}>
+                    <Alert/>
+                </Article>
                 <Article className={'todo-container'}>
                     <Todo/>
                 </Article>
