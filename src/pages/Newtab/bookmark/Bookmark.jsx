@@ -4,7 +4,7 @@ import {Cells, CellsTitle, Cell, CellBody, CellFooter} from 'react-weui';
 import BookmarkLogo from '../../../assets/img/bookmark.png';
 import BookmarkStorage from "../../../helpers/BookmarkStorage";
 
-const Bookmark = () => {
+const Bookmark = ({active}) => {
     const [bookmarks, setBookmarks] = useState([]);
     const [searchText, setSearchText] = useState('');
 
@@ -36,7 +36,7 @@ const Bookmark = () => {
     }, []);
 
     return (
-        <div className={'bookmark'}>
+        <div className={'bookmark fade-in'}>
             <div className="search">
                 <div className="input-wrapper">
                     <span className="icon-search1"/>
