@@ -115,6 +115,24 @@ var options = {
         new CopyWebpackPlugin(
             [
                 {
+                    from: 'src/assets/audio/alert.aac',
+                    to: path.join(__dirname, 'build'),
+                    force: true,
+                },
+                {
+                    from: 'src/assets/audio/alert.js',
+                    to: path.join(__dirname, 'build'),
+                    force: true,
+                },
+            ],
+            {
+                logLevel: 'info',
+                copyUnmodified: true,
+            },
+        ),
+        new CopyWebpackPlugin(
+            [
+                {
                     from: 'src/pages/Content/content.styles.css',
                     to: path.join(__dirname, 'build'),
                     force: true,

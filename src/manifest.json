@@ -1,7 +1,7 @@
 {
     "name": "Chrome Extension with React & Webpack",
     "manifest_version": 2,
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "content_security_policy": "script-src 'self' 'sha256-WOdSzz11/3cpqOdrm89LBL2UPwEU9EhbDtMy2OciEhs='",
     "permissions": [
         "bookmarks",
         "storage"
@@ -38,6 +38,7 @@
         }
     ],
     "web_accessible_resources": [
+        "alert.aac",
         "content.styles.css",
         "icon-128.png",
         "icon-34.png"
