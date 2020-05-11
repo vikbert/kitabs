@@ -8,26 +8,23 @@
   overflow: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @media @medium {
+  @media @tablet {
     flex-direction: column;
   }
 }
 
 .right {
-  width: 267px;
-}
-
-.middle {
-  flex-grow: 1;
+  height: 100vh;
+  background-color: #ffffff;
 }
 
 .left {
-  background-color: #ffffff;
-  @media @medium {
-    width: 100vw;
-  }
-  @media only screen and (min-width: @screen-md-min) {
-    width: 480px;
+  flex-grow: 1;
+
+  .clock-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
   }
 }
 

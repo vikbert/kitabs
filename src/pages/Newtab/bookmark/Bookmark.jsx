@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Cells, CellsTitle, Cell, CellBody, CellFooter} from 'react-weui';
-import BookmarkLogo from '../../../assets/img/bookmark.png';
 import BookmarkStore from "../../../helpers/BookmarkStore";
 
 const Bookmark = ({active}) => {
@@ -51,7 +50,11 @@ const Bookmark = ({active}) => {
 
             <div className={'list-container'} style={{display: bookmarks.length ? "block" : "none"}}>
                 <div className="top">
-                    <CellsTitle>{`Found ${bookmarks.length} entries`}</CellsTitle>
+                    <CellsTitle>
+                        <span>Found</span>
+                        <span className={'result-amount'}>{bookmarks.length}</span>
+                        <span>Entries</span>
+                    </CellsTitle>
                     <Cells>
                         {bookmarks.map((element, index) => (
                             <Cell onClick={() => loadUrl(element.url)} key={index} access>
@@ -63,9 +66,6 @@ const Bookmark = ({active}) => {
                         ))}
                     </Cells>
                 </div>
-            </div>
-            <div className="bottom">
-                <img className={'bookmark-logo'} src={BookmarkLogo} alt="bookmark"/>
             </div>
         </div>
     );

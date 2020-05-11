@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
-import {Article} from 'react-weui';
-import Clock from "./clock/Clock";
 import Bookmark from "./bookmark/Bookmark";
-import Note from "./note";
 import Todo from "./todo";
-import Header from "./header";
-import Alert from "./alert/Alert";
+import Clock from "./clock/Clock";
 
 const NewTab = () => {
     const [visibility, setVisibility] = useState({
@@ -18,26 +14,18 @@ const NewTab = () => {
 
     return (
         <div className={'newTab fade-in'}>
-            <div className="left">  
-                <Header
-                    showBookmark={handleShowBookmark}
-                    showNote={handleShowNote}
-                />
-                {visibility.bookmark && <Bookmark active={visibility.bookmark}/>}
-                {visibility.note && <Note active={visibility.note}/>}
-            </div>
-            <div className="middle">
-                <Article className={'alert-container'}>
-                    <Alert/>
-                </Article>
-                <Article className={'todo-container'}>
-                    <Todo/>
-                </Article>
+            <div className="left">
+                {/*<div className={'alert-container'}>*/}
+                {/*    <Alert/>*/}
+                {/*</div>*/}
+                <Bookmark active={visibility.bookmark}/>
+
+                <div className="clock-container">
+                    <Clock/>
+                </div>
             </div>
             <div className="right">
-                <Article className={'clock-container'}>
-                    <Clock/>
-                </Article>
+                <Todo/>
             </div>
         </div>
     );

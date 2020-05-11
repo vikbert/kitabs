@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import classnames from 'classnames';
 import TodoItem from "./TodoItem";
-import {Article, Toptips} from 'react-weui';
+import {Toptips} from 'react-weui';
 import TodoFactory from "./TodoFactory";
 import todoStore from "../../../helpers/TodoStore";
 import TodoConfig from "./TodoConfig";
@@ -19,7 +19,7 @@ const INIT_TOGGLE = {
 };
 
 const INIT_CONTROL = {
-    filter: FILTER.all,
+    filter: FILTER.active,
     countActive: 0,
 };
 
@@ -46,10 +46,6 @@ const Todo = () => {
         setTodos(updatedList);
 
         todoStore.saveTodos(updatedList);
-    };
-
-    const toggleSlide = () => {
-        setToggle({...toggle, slideActive: !toggle.slideActive});
     };
 
     const toggleSearchMode = () => {
@@ -88,6 +84,11 @@ const Todo = () => {
     };
 
     const handleClickDeleteCompleted = () => {
+        const confirmed = window.confirm('!!! Do you want to delete all completed todos?');
+        if (!confirmed) {
+            return;
+        }
+        
         setControl({...control, filter: FILTER.all});
 
         const activeTodos = {...todos};
@@ -166,85 +167,73 @@ const Todo = () => {
                     />
                     <span className={toggle.searchActive ? "icon-x" : "icon-search1"} onClick={toggleSearchMode}/>
                 </header>
-                <div className="main main--starred">
-                    {starredTodoKeys.length > 0 && (
-                        <ul className="todo-list">
-                            {starredTodoKeys.map((key) => (
-                                <TodoItem
-                                    key={todos[key].id}
-                                    item={todos[key]}
-                                    updateTodoCallback={(todo) => callbackUpdateTodo(todo)}
-                                    deleteTodoCallback={(todo) => callbackDeleteTodo(todo)}
-                                />
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            </div>
-            <div className="slide">
-                <Article className="slide__header">
-                    <input onChange={toggleSlide}
-                           id="toggle-slide"
-                           type="checkbox"
-                           className="toggle-slide" checked={toggle.slideActive}/>
-                    <label htmlFor="toggle-slide"
-                           className="icon-menu icon__medium icon__clickable">
-                    </label>
-                </Article>
-                <div className="main main--slide slide-bottom">
+                <main className="main">
                     <ul className="todo-list">
-                        {toggle.slideActive && normalTodoKeys.map((key) => (
+                        {starredTodoKeys.map((key) => (
                             <TodoItem
                                 key={todos[key].id}
                                 item={todos[key]}
                                 updateTodoCallback={(todo) => callbackUpdateTodo(todo)}
                                 deleteTodoCallback={(todo) => callbackDeleteTodo(todo)}
-                                showToptip={toggleToptip}
+                            />
+                        ))}
+                        <li className={'category category-inbox'}>
+                            <label>inbox</label>
+                        </li>
+                        {normalTodoKeys.map((key) => (
+                            <TodoItem
+                                key={todos[key].id}
+                                item={todos[key]}
+                                updateTodoCallback={(todo) => callbackUpdateTodo(todo)}
+                                deleteTodoCallback={(todo) => callbackDeleteTodo(todo)}
                                 numberStarred={starredTodoKeys.length}
+                                showToptip={() => toggleToptip()}
                             />
                         ))}
                     </ul>
-                </div>
-                <Article
-                    className={classnames("slide__control", {"shadow": normalTodoKeys.length > TodoConfig.visibleTodosLimit})}>
-                    <ul className={'filters'}>
-                        <li>
-                            <a href="#/all">{control.countActive} items left</a>
-                        </li>
-                    </ul>
-                    <ul className={'filters'}>
-                        <li>
-                            <a className={control.filter === FILTER.all ? 'selected' : undefined}
-                               href={"#/" + FILTER.all}
-                               onClick={() => setControl({...control, filter: FILTER.all})}
-                            >
-                                All ({control.countAll || 0})
-                            </a>
-                        </li>
+                </main>
+                <footer
+                    className={classnames("footer", {"shadow": normalTodoKeys.length > TodoConfig.visibleTodosLimit})}>
+                    <div className="filter-container">
+                        <ul className={'filters'}>
+                            <li>
+                                <a href="#/clean-all-completed" onClick={handleClickDeleteCompleted}>Clean all completed</a>
+                            </li>
+                        </ul>
+                        <ul className={'filters'}>
+                            <li>
+                                <a className={control.filter === FILTER.all ? 'selected' : undefined}
+                                   href={"#/" + FILTER.all}
+                                   onClick={() => setControl({...control, filter: FILTER.all})}
+                                >
+                                    All ({control.countAll || 0})
+                                </a>
+                            </li>
 
-                        <li>
-                            <a className={control.filter === FILTER.active ? 'selected' : undefined}
-                               href={"#/" + FILTER.active}
-                               onClick={() => setControl({...control, filter: FILTER.active})}
-                            >
-                                Active ({control.countActive || 0})
-                            </a>
-                        </li>
-                        <li>
-                            <a className={control.filter === FILTER.completed ? 'selected' : undefined}
-                               href={"#/" + FILTER.completed}
-                               onClick={() => setControl({...control, filter: FILTER.completed})}
-                            >
-                                Completed ({control.countAll - control.countActive || 0})
-                            </a>
-                        </li>
-                    </ul>
-                    <ul className={'filters'}>
-                        <li>
-                            <a href="#/clean-all-completed" onClick={handleClickDeleteCompleted}>Clean all completed</a>
-                        </li>
-                    </ul>
-                </Article>
+                            <li>
+                                <a className={control.filter === FILTER.active ? 'selected' : undefined}
+                                   href={"#/" + FILTER.active}
+                                   onClick={() => setControl({...control, filter: FILTER.active})}
+                                >
+                                    Active ({control.countActive || 0})
+                                </a>
+                            </li>
+                            <li>
+                                <a className={control.filter === FILTER.completed ? 'selected' : undefined}
+                                   href={"#/" + FILTER.completed}
+                                   onClick={() => setControl({...control, filter: FILTER.completed})}
+                                >
+                                    Completed ({control.countAll - control.countActive || 0})
+                                </a>
+                            </li>
+                        </ul>
+                        <ul className={'filters'}>
+                            <li>
+                                <a href="#/clean-all-completed" onClick={handleClickDeleteCompleted}>Clean all completed</a>
+                            </li>
+                        </ul>
+                    </div>
+                </footer>
             </div>
         </>
     );
