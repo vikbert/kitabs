@@ -11,8 +11,9 @@
 .todo-container {
 }
 
+@todo-width: 760px;
 .todoapp {
-  width: 760px;
+  width: @todo-width;
   margin: 0 auto;
   background: #fff;
   position: relative;
@@ -22,9 +23,8 @@
 
 .slide {
   background: #ffffff;
-  width: 749px;
+  width: @todo-width;
   margin: 0 auto;
-  //margin-top: 10px;
   font-size: 18px;
   font-family: 'Roboto Condensed', sans-serif;
   min-height: 13px;
@@ -111,7 +111,6 @@
 }
 
 .main--starred {
-  max-height: 177px;
   overflow: hidden;
   box-shadow: 0 8px 6px -6px #4c4c4c;
 }

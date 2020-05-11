@@ -120,8 +120,8 @@ const Todo = () => {
             return [];
         }
 
-        if (toggle.searchActive && newTodo.length >= 3) {
-            keys = keys.filter((key) => todos[key].title.includes(newTodo));
+        if (toggle.searchActive && newTodo.length >= 2) {
+            keys = keys.filter((key) => todos[key].title.toLowerCase().includes(newTodo.toLowerCase()));
         }
 
         switch (control.filter) {
@@ -191,7 +191,7 @@ const Todo = () => {
                            className="icon-menu icon__medium icon__clickable">
                     </label>
                 </Article>
-                <div className="main main--slide">
+                <div className="main main--slide slide-bottom">
                     <ul className="todo-list">
                         {toggle.slideActive && normalTodoKeys.map((key) => (
                             <TodoItem
