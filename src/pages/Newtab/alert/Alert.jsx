@@ -20,7 +20,7 @@ const Alert = () => {
             </Popup>
             {MINUTE_OPTION.map((minute) => (
                 <div key={minute} className={'button-alert'}
-                     onClick={(event, value) => handleOnClickMinuteButton(event, minute)}>
+                     onClick={(event, minute) => handleOnClickMinuteButton(event, minute)}>
                     <span className="icon icon-alarm"/>
                     <span>{`${minute}"`}</span>
                 </div>

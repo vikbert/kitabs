@@ -48,6 +48,7 @@ const TimerDisplay = ({counterInSeconds, hidePopup}) => {
 
     useEffect(() => {
         countDown(counterInSeconds);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

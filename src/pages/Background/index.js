@@ -3,8 +3,8 @@ import '../../assets/img/icon-128.png';
 import BookmarkStore from "../../helpers/BookmarkStore";
 import {logBookmarks} from "../../helpers/Logger";
 
-chrome.browserAction.onClicked.addListener((tab) => {
-    alert('clicked');
+chrome.browserAction.onClicked.addListener(() => {
+    alert('clicked on the extension icon');
 });
 
 chrome.runtime.onMessage.addListener((request) => {
