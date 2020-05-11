@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {secondsToTime} from "../../../helpers/TimerHelper";
+import {speak} from "../../../helpers/Notification";
 
 let intervals = [];
 
@@ -8,13 +9,22 @@ const clearAllIntervals = () => {
     intervals = [];
 };
 
-const TimerDisplay = ({counterInSeconds}) => {
+const notificationByDuration = (minutes) => {
+    if (minutes === 25) {
+        return 'Zeit ist um, mache bitte eine kleine Pause für ein gesundes Rücken.';
+    }
+
+    return 'Zeit ist um';
+};
+
+const TimerDisplay = ({counterInSeconds, hidePopup}) => {
     const [seconds, setSeconds] = useState(0);
 
     const reset = () => {
-        clearAllIntervals();
         setSeconds(0);
-        window.close();
+        clearAllIntervals();
+        speak(notificationByDuration(counterInSeconds / 60));
+        hidePopup();
     };
 
     const countDown = (counterSeconds) => {
@@ -28,6 +38,7 @@ const TimerDisplay = ({counterInSeconds}) => {
         const intervalId = setInterval(() => {
             counterSeconds--;
             setSeconds(counterSeconds);
+            window.document.title = secondsToTime(counterSeconds);
             if (counterSeconds === 0) {
                 reset();
             }

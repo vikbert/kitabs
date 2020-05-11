@@ -3,26 +3,26 @@ import useVisible from "../../../hooks/useVisible";
 import Popup from "../../../containers/Popup";
 import TimerDisplay from "./TimerDisplay";
 
-const OPTIONS = [5, 10, 15, 25];
+const MINUTE_OPTION = [5, 10, 15, 25];
 const Alert = () => {
-    const [duration, setDuration] = useState(5);
-    const {visible, show} = useVisible();
+    const [seconds, setSeconds] = useState(5);
+    const {visible, show, hide} = useVisible();
 
-    const handleOnClick = (event, value) => {
-        setDuration(value);
+    const handleOnClickMinuteButton = (event, minute) => {
+        setSeconds(minute * 60);
         show();
     };
 
     return (
         <>
             <Popup show={visible}>
-                <TimerDisplay counterInSeconds={duration * 60}/>
+                <TimerDisplay counterInSeconds={seconds} hidePopup={hide}/>
             </Popup>
-            {OPTIONS.map((option) => (
-                <div key={option} className={'button-alert'}
-                     onClick={(event, value) => handleOnClick(event, option)}>
+            {MINUTE_OPTION.map((minute) => (
+                <div key={minute} className={'button-alert'}
+                     onClick={(event, value) => handleOnClickMinuteButton(event, minute)}>
                     <span className="icon icon-alarm"/>
-                    <span>{`${option}"`}</span>
+                    <span>{`${minute}"`}</span>
                 </div>
             ))}
         </>

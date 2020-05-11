@@ -12,6 +12,11 @@ chrome.runtime.onMessage.addListener((request) => {
         logBookmarks('event listener: init import bookmarks');
         chrome.bookmarks.getTree(BookmarkStore.importBookmarks);
     }
+    if (request.tts) {
+        chrome.tts.speak(request.message, {
+            'lang': 'de-DE',
+        });
+    }
 
     return false;
 });
