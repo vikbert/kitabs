@@ -22,10 +22,13 @@
 }
 
 .left {
+  background-color: #ffffff;
   @media @medium {
     width: 100vw;
   }
-  background-color: #a4a4a4;
+  @media only screen and (min-width: @screen-md-min) {
+    width: 480px;
+  }
 }
 
 
