@@ -8,7 +8,7 @@ const Alert = () => {
     const [seconds, setSeconds] = useState(5);
     const {visible, show, hide} = useVisible();
 
-    const handleOnClickMinuteButton = (event, minute) => {
+    const handleOnClickMinuteButton = (minute) => {
         setSeconds(minute * 60);
         show();
     };
@@ -20,7 +20,7 @@ const Alert = () => {
             </Popup>
             {MINUTE_OPTION.map((minute) => (
                 <div key={minute} className={'button-alert'}
-                     onClick={(event, minute) => handleOnClickMinuteButton(event, minute)}>
+                     onClick={() => handleOnClickMinuteButton(minute)}>
                     <span className="icon icon-alarm"/>
                     <span>{`${minute}"`}</span>
                 </div>
