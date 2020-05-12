@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import Bookmark from "./bookmark/Bookmark";
+import Bookmark from "./bookmark";
 import Todo from "./todo";
-import Clock from "./clock/Clock";
+import Alert from "./alert";
+import Clock from "./clock";
 
 const NewTab = () => {
     const [visibility, setVisibility] = useState({
@@ -15,12 +16,9 @@ const NewTab = () => {
     return (
         <div className={'newTab fade-in'}>
             <div className="left">
-                {/*<div className={'alert-container'}>*/}
-                {/*    <Alert/>*/}
-                {/*</div>*/}
                 <Bookmark active={visibility.bookmark}/>
-
                 <div className="clock-container">
+                    <Alert/>
                     <Clock/>
                 </div>
             </div>

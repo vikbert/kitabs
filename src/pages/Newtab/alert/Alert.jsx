@@ -15,16 +15,18 @@ const Alert = () => {
 
     return (
         <>
-            <Popup show={visible}>
-                <TimerDisplay counterInSeconds={seconds} hidePopup={hide}/>
-            </Popup>
-            {MINUTE_OPTION.map((minute) => (
-                <div key={minute} className={'button-alert'}
-                     onClick={() => handleOnClickMinuteButton(minute)}>
-                    <span className="icon icon-alarm"/>
-                    <span>{`${minute}"`}</span>
-                </div>
-            ))}
+            <div className="alert">
+                <Popup show={visible}>
+                    <TimerDisplay counterInSeconds={seconds} hidePopup={hide}/>
+                </Popup>
+                {MINUTE_OPTION.map((minute) => (
+                    <div key={minute} className={'button-alert'}
+                         onClick={() => handleOnClickMinuteButton(minute)}>
+                        <span className="icon icon-alarm"/>
+                        <span>{`${minute}"`}</span>
+                    </div>
+                ))}
+            </div>
         </>
     );
 };
