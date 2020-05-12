@@ -10,7 +10,7 @@
 @todoapp-width: 660px;
 .todoapp {
   width: @todoapp-width;
-  @media @tablet {
+  @media @medium {
     width: 100%;
   }
   max-height: 100vh;
@@ -20,6 +20,9 @@
   position: relative;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 22px;
+  @media @small {
+    font-size: 19px;
+  }
 }
 
 .header {
@@ -243,7 +246,7 @@
 }
 
 .todo-list li .destroy {
-  display: none;
+  display: block;
   position: absolute;
   top: -2px;
   right: 35px;
@@ -281,16 +284,19 @@
 
 .footer {
   width: 100%;
+  @media only screen and (min-width: @screen-medium-min) {
+    width: @todoapp-width ;
+  }
   position: fixed;
   bottom: 0;
   z-index: 100;
   background-color: #ffffff;
-  //padding: 10px;
 }
 
 .footer.shadow {
   box-shadow: 0 8px 29px 0px #525252;
 }
+
 .filter-container {
   display: flex;
   justify-content: space-between;
