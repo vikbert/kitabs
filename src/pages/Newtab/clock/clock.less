@@ -9,9 +9,10 @@
   flex-direction: column;
   text-align: center;
   width: 230px;
+  padding-right: 15px;
 
   .time {
-    color: #f6f6f6;
+    color: #ffffff;
     font-size: 90px;
     font-weight: 700;
     line-height: 80px;
@@ -20,36 +21,52 @@
   .date {
     font-size: 25px;
     font-weight: 700;
-    color: #dedadaad;
+    color: #fdfafaad;
   }
 }
 
 .alert {
-  display: flex;
-  justify-content: space-evenly;
+  @item-width: 55px;
+  display: grid;
+  grid-template-columns: @item-width @item-width;
   margin: 0 auto;
-  @media only screen and (min-width: @screen-large-min) {
-    width: 700px;
+  @media only screen and (min-width: 700px) {
+    grid-template-columns: @item-width @item-width @item-width @item-width;
+  }
+
+  @media only screen and (min-width: 877px) and (max-width: 1260px) {
+    grid-template-columns: @item-width @item-width;
   }
 }
 
+
 .button-alert {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  border-radius: 10px;
-  padding: 4px 10px;
+  width: 30px;
+  border-radius: 30px;
+  padding: 8px;
+  margin: 8px;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.57);
+  background-color: rgba(255, 255, 255, 0.4);
   color: #1e1e1e;
   font-size: 18px;
+
   &:hover {
     color: #ffffff;
     background-color: rgba(255, 140, 0, 0.75);
   }
-  .icon {
-    padding: 5px 5px 5px 0;
+  .logo-alert {
+    color: #ffffff;
+    padding: 4px 0 0 0;
   }
 }
+.button-alert.button-icon {
+  background-color: rgba(255, 140, 0, 0.75);
+}
+
+// count down display
 .timer-display {
   font-size: 5rem;
   font-weight: bold;
