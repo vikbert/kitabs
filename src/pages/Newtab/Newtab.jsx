@@ -3,6 +3,7 @@ import Bookmark from "./bookmark";
 import Todo from "./todo";
 import Alert from "./alert";
 import Clock from "./clock";
+import Note from "./note";
 
 const NewTab = () => {
     const [visibility, setVisibility] = useState({
@@ -20,6 +21,9 @@ const NewTab = () => {
                 <div className="clock-container">
                     <Alert/>
                     <Clock/>
+                </div>
+                <div className="note-container">
+                    <Note/>
                 </div>
             </div>
             <div className="right">

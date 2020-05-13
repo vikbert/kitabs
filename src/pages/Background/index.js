@@ -1,10 +1,10 @@
 import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
 import BookmarkStore from "../../helpers/BookmarkStore";
-import {logBookmarks} from "../../helpers/Logger";
+import {logBookmarks, logPopup} from "../../helpers/Logger";
 
 chrome.browserAction.onClicked.addListener(() => {
-    alert('clicked on the extension icon');
+    logPopup('Popup is open by click');
 });
 
 chrome.runtime.onMessage.addListener((request) => {

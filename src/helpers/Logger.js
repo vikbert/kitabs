@@ -1,5 +1,5 @@
-export const logTodo = (message, ...others) => {
-    console.log('[todo_module]: ' + message, others);
+export const logPopup = (message, ...others) => {
+    console.log('[popup_module]: ' + message, others);
 };
 
 export const logBookmarks = (message, ...others) => {
