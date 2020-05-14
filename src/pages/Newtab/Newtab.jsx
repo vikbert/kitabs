@@ -22,9 +22,7 @@ const NewTab = () => {
                     <Alert/>
                     <Clock/>
                 </div>
-                <div className="note-container">
-                    <Note/>
-                </div>
+                <Note/>
             </div>
             <div className="right">
                 <Todo/>

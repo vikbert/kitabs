@@ -178,7 +178,7 @@ const Todo = () => {
                             />
                         ))}
                         <li className={'category category-inbox'}>
-                            <label>inbox</label>
+                            <label><span className="icon icon-drawer2" style={{paddingLeft: 0}}/></label>
                         </li>
                         {normalTodoKeys.map((key) => (
                             <TodoItem

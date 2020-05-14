@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Article} from 'react-weui';
 import noteStore from '../../../storage/NoteStore';
+import NoteEdit from "./NoteEdit";
 
 const Note = () => {
     const [notes, setNotes] = useState({});
@@ -18,26 +18,41 @@ const Note = () => {
         setEditKey(noteId);
     };
 
+    const handleCloseEditingNote = (note) => {
+        setEditKey(null);
+        const cloned = {...notes};
+        cloned[note.id] = note;
+
+        setNotes(cloned);
+    };
+
     useEffect(() => {
         setNotes(noteStore.loadAll());
     }, []);
 
     return (
-        <Article className={'fade-in'}>
-            <ul>
-                {Object.keys(notes).map((key) => (
-                    <li key={key}>
-                        <a href="#" className={editKey === key ? 'edit': null} onClick={() => handleClickNote(key)}>
-                          <span className="close-icon"
-                                onClick={() => handleDeleteNote(key)}>
-                          {'X'}
-                          </span>
-                            <span>{notes[key].content}</span>
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        </Article>
+        <div className={'fade-in note-container'}>
+            {Object.keys(notes).map((key) => (
+                <div key={key}>
+                    {editKey === key
+                        ? (
+                            <div className={'edit'}>
+                                <NoteEdit note={notes[key]} closeEditing={(note) => handleCloseEditingNote(note)}/>
+                            </div>
+                        )
+                        : (
+                            <div className={'view'} onClick={() => handleClickNote(key)}>
+                                <span className="close-icon"
+                                      onClick={() => handleDeleteNote(key)}>
+                                    {'X'}
+                                </span>
+                                <span>{notes[key].content}</span>
+                            </div>
+                        )
+                    }
+                </div>
+            ))}
+        </div>
     );
 };
 
