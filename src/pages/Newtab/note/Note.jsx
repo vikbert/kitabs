@@ -28,7 +28,11 @@ const Note = () => {
 
     return (
         <div className={'note-container fade-in'}>
-            <NoteEditLarge visible={visible} note={editNote} closeEditLarge={hide}/>
+            <NoteEditLarge
+                visible={visible}
+                note={editNote}
+                closeEditLarge={hide}
+            />
             <div className="note-grid">
                 {Object.keys(notes).map((noteKey) => (
                     <div key={noteKey} className={'edit'}>

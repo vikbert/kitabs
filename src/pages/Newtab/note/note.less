@@ -1,7 +1,8 @@
+@note-bg: rgb(255, 255, 205);
 .note-container {
   overflow: scroll;
   position: relative;
-  padding: 0 14px;
+  height: 664px;
   @media @medium {
     display: none;
   }
@@ -16,7 +17,7 @@ textarea.textarea-note {
   color: inherit;
   font-size: 15px;
   outline: 0;
-  background-color: #ffc;
+  background-color: @note-bg;
   line-height: 1.4;
 }
 
@@ -27,7 +28,7 @@ textarea.textarea-note {
   width: 100%;
   color: #000000;
   background-color: rgba(89, 89, 89, 0.71);
-  z-index: @z-index-note-list;
+  z-index: @z-index-note-popup;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,12 +72,12 @@ textarea.textarea-note {
     grid-template-columns: 1fr 45px;
     text-decoration: none;
     color: #000;
-    background: #ffc;
+    background: @note-bg;
     height: 10em;
     width: auto;
-    -moz-box-shadow: 5px 5px 7px rgba(33, 33, 33, 1);
-    -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
-    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    //-moz-box-shadow: 5px 5px 7px rgba(33, 33, 33, 1);
+    //-webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    //box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
     position: relative;
     z-index: @z-index-note-list;
     margin: 8px;
