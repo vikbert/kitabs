@@ -1,50 +1,110 @@
 .note-container {
-  height: 660px;
   overflow: scroll;
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  grid-template-rows: auto;
+  position: relative;
+  padding: 0 14px;
+  @media @medium {
+    display: none;
+  }
 }
 
-.note-container {
-  .view, .edit {
+textarea.textarea-note {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  display: block;
+  resize: none;
+  border: 0;
+  width: 100%;
+  color: inherit;
+  font-size: 15px;
+  outline: 0;
+  background-color: #ffc;
+  line-height: 1.4;
+}
+
+.edit-popup {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  color: #000000;
+  background-color: rgba(89, 89, 89, 0.71);
+  z-index: @z-index-note-list;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .popup-control {
+    text-align: right;
+    button {
+      cursor: pointer;
+    }
+  }
+
+  .edit-container {
+    position: relative;
+    height: 80%;
+    width: 80%;
+    background-color: #ffc;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .note-title {
+      font-size: 24px;
+      color: #8e8d8d;
+    }
+  }
+}
+
+.note-grid {
+  //position: absolute;
+  //top: 0;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  @media only screen and (max-width: @screen-large-min) {
+    grid-template-columns: 1fr;
+  }
+  grid-template-rows: 137px;
+  overflow: scroll;
+
+  .edit {
+    display: grid;
+    grid-template-columns: 1fr 45px;
     text-decoration: none;
     color: #000;
     background: #ffc;
-    display: block;
     height: 10em;
     width: auto;
     -moz-box-shadow: 5px 5px 7px rgba(33, 33, 33, 1);
     -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
     box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
     position: relative;
-    z-index: 5;
+    z-index: @z-index-note-list;
     margin: 8px;
-  }
-  .view {
+    padding: 15px 5px 15px 15px;
     cursor: pointer;
-    padding: 8px 10px 10px 10px;
   }
 
-  .view:hover {
-    span.close-icon {
-      display: block;
+  .note-edit-control {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    padding-left: 18px;
+
+    span {
+      cursor: pointer;
+      color: #9a9696;
+      display: none;
+      font-size: 20px;
+
+      &:hover {
+        color: darkorange;
+      }
     }
   }
-  .edit {
-    padding: 10px;
-  }
-  .edit textarea {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    display: block;
-    border: 0;
-    resize: none;
-    width: 100%;
-    color: inherit;
-    font-size: 15px;
-    outline: 0;
-    background-color: #ffc;
-    margin: 0 0 10px 0;
+
+  .edit:hover {
+    span {
+      display: block;
+    }
   }
 
   span.close-icon {

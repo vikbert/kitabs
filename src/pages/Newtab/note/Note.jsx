@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import noteStore from '../../../storage/NoteStore';
-import NoteEdit from "./NoteEdit";
+import NoteTextArea from "./NoteEdit";
+import useVisible from "../../../hooks/useVisible";
+import NoteEditLarge from "./NoteEditLarge";
 
 const Note = () => {
     const [notes, setNotes] = useState({});
-    const [editKey, setEditKey] = useState(null);
+    const [editNote, setEditNote] = useState(null);
+    const {visible, show, hide} = useVisible();
 
     const handleDeleteNote = (noteId) => {
         const cloned = {...notes};
@@ -14,16 +17,9 @@ const Note = () => {
         noteStore.delete(noteId);
     };
 
-    const handleClickNote = (noteId) => {
-        setEditKey(noteId);
-    };
-
-    const handleCloseEditingNote = (note) => {
-        setEditKey(null);
-        const cloned = {...notes};
-        cloned[note.id] = note;
-
-        setNotes(cloned);
+    const handleOpenLargeEditView = (note) => {
+        setEditNote(note);
+        show();
     };
 
     useEffect(() => {
@@ -31,27 +27,22 @@ const Note = () => {
     }, []);
 
     return (
-        <div className={'fade-in note-container'}>
-            {Object.keys(notes).map((key) => (
-                <div key={key}>
-                    {editKey === key
-                        ? (
-                            <div className={'edit'}>
-                                <NoteEdit note={notes[key]} closeEditing={(note) => handleCloseEditingNote(note)}/>
-                            </div>
-                        )
-                        : (
-                            <div className={'view'} onClick={() => handleClickNote(key)}>
-                                <span className="close-icon"
-                                      onClick={() => handleDeleteNote(key)}>
-                                    {'X'}
-                                </span>
-                                <span>{notes[key].content}</span>
-                            </div>
-                        )
-                    }
-                </div>
-            ))}
+        <div className={'note-container fade-in'}>
+            <NoteEditLarge visible={visible} note={editNote} closeEditLarge={hide}/>
+            <div className="note-grid">
+                {Object.keys(notes).map((noteKey) => (
+                    <div key={noteKey} className={'edit'}>
+                        <NoteTextArea note={notes[noteKey]}/>
+                        <div className="note-edit-control">
+                            <span className={'icon-x'} onClick={() => handleDeleteNote(noteKey)}/>
+                            <span className={'icon-external-link'}
+                                  onClick={() => handleOpenLargeEditView(notes[noteKey])}/>
+                            <span/>
+                            <span/>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

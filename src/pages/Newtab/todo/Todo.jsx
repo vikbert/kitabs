@@ -196,9 +196,6 @@ const Todo = () => {
                     className={classnames("footer", {"shadow": normalTodoKeys.length > TodoConfig.visibleTodosLimit})}>
                     <div className="filter-container">
                         <ul className={'filters'}>
-                            <li>
-                                <a href="#/clean-all-completed" onClick={handleClickDeleteCompleted}>Clean all completed</a>
-                            </li>
                         </ul>
                         <ul className={'filters'}>
                             <li>

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?8kfwfk');
-  src:  url('fonts/icomoon.eot?8kfwfk#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?8kfwfk') format('truetype'),
-    url('fonts/icomoon.woff?8kfwfk') format('woff'),
-    url('fonts/icomoon.svg?8kfwfk#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?pc27r');
+  src:  url('fonts/icomoon.eot?pc27r#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?pc27r') format('truetype'),
+    url('fonts/icomoon.woff?pc27r') format('woff'),
+    url('fonts/icomoon.svg?pc27r#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -27,6 +27,9 @@
 
 .icon-bookmark:before {
   content: "\e901";
+}
+.icon-external-link:before {
+  content: "\e907";
 }
 .icon-file-text:before {
   content: "\e904";

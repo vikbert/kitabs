@@ -2,22 +2,18 @@
 .bookmark {
   display: flex;
   flex-direction: column;
-  height: auto;
 
   .list-container {
     background-color: #ffffff;
-    margin: 0 14px;
-
+    margin: 62px 14px 0 14px;
+    max-height: 785px;
+    overflow: scroll;
+    position: absolute;
+    z-index: @z-index-bookmark-results;
     @media @medium {
-      width: 100%;
       position: fixed;
-      z-index: 200;
       margin: 0;
       margin-top: 60px;
-    }
-
-    .top {
-      height: 100vh;
     }
   }
 

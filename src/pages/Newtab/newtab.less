@@ -2,10 +2,9 @@
   display: flex;
   background: url("../../assets/img/bg3.jpg") no-repeat;
   background-size: cover;
-  height: 100vh;
   width: 100vw;
   color: #4a4a4a;
-  overflow: auto;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @media @medium {
@@ -13,19 +12,18 @@
   }
 }
 
+.right, .left {
+  margin-bottom: -5000px;
+  padding-bottom: 5000px;
+}
+
 .right {
-  height: 100vh;
   background-color: #ffffff;
 }
 
 .left {
+  position: relative;
   flex-grow: 1;
-
-  .clock-container {
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-  }
 }
 
 .alert {
