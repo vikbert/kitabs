@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Article, Button } from 'react-weui';
-import noteStore from '../../../storage/NoteStore';
+import noteStore from '../../../storages/NoteStore';
 import NoteFactory from './NoteFactory';
 
 const NoteForm = () => {

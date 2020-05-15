@@ -1,4 +1,4 @@
-import {logBookmarks} from "./Logger";
+import {logBookmarks} from "../helpers/Logger";
 import store from 'store';
 
 const BookmarkStore = {key: 'kitabs_bookmarks'};

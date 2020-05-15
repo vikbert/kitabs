@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import useVisible from "../../../hooks/useVisible";
-import Popup from "../../../containers/Popup";
+import Popup from "../../../components/Popup";
 import TimerDisplay from "./TimerDisplay";
 import {Msg} from 'react-weui';
 

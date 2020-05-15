@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-import noteStore from "../../../storage/NoteStore";
+import noteStore from "../../../storages/NoteStore";
 
 const NoteEdit = ({note, rows = null}) => {
     const textRef = useRef();

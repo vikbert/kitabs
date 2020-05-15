@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {Cells, CellsTitle, Cell, CellBody, CellFooter} from 'react-weui';
-import BookmarkStore from "../../../helpers/BookmarkStore";
+import BookmarkStore from "../../../storages/BookmarkStore";
 import useResize from "../../../hooks/useResize";
 
 const Bookmark = ({active}) => {

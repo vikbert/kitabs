@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import TodoItem from "./TodoItem";
 import {Toptips} from 'react-weui';
 import TodoFactory from "./TodoFactory";
-import todoStore from "../../../helpers/TodoStore";
+import todoStore from "../../../storages/TodoStore";
 import TodoConfig from "./TodoConfig";
 
 const FILTER = {
@@ -88,7 +88,7 @@ const Todo = () => {
         if (!confirmed) {
             return;
         }
-        
+
         setControl({...control, filter: FILTER.all});
 
         const activeTodos = {...todos};
@@ -226,7 +226,8 @@ const Todo = () => {
                         </ul>
                         <ul className={'filters'}>
                             <li>
-                                <a href="#/clean-all-completed" onClick={handleClickDeleteCompleted}>Clean all completed</a>
+                                <a href="#/clean-all-completed" onClick={handleClickDeleteCompleted}>Clean all
+                                    completed</a>
                             </li>
                         </ul>
                     </div>

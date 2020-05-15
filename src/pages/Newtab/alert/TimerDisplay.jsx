@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {secondsToTime} from "../../../helpers/TimerHelper";
+import {secondsToTime} from "../../../helpers/Timer";
 import {speak} from "../../../helpers/Notification";
 
 let intervals = [];

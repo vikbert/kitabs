@@ -1,6 +1,6 @@
 import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
-import BookmarkStore from "../../helpers/BookmarkStore";
+import BookmarkStore from "../../storages/BookmarkStore";
 import {logBookmarks, logPopup} from "../../helpers/Logger";
 
 chrome.browserAction.onClicked.addListener(() => {

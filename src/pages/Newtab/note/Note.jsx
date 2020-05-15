@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import noteStore from '../../../storage/NoteStore';
+import noteStore from '../../../storages/NoteStore';
 import NoteTextArea from "./NoteEdit";
 import useVisible from "../../../hooks/useVisible";
 import NoteEditLarge from "./NoteEditLarge";
