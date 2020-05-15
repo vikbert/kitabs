@@ -10,7 +10,8 @@ const Bookmark = ({active}) => {
     const {width} = useResize(bookmarkRef);
 
     const handleChangeSearch = (event) => {
-        const searchString = event.target.value.trimLeft().toLowerCase();
+        const searchString = event.target.value.toLowerCase();
+        
         setSearchText(searchString);
 
         if (searchString.length >= 2) {
