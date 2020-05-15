@@ -28,8 +28,8 @@ const Bookmark = ({active}) => {
     };
 
     const handleOnBlur = () => {
-        setSearchText('');
-        setBookmarks([]);
+        // setSearchText('');
+        // setBookmarks([]);
     };
 
     const loadUrl = (url) => {

@@ -4,22 +4,20 @@
   flex-direction: column;
 
   .list-container {
-    background-color: #ffffff;
-    margin: 62px 14px 0 14px;
-    max-height: 785px;
+    max-height: 807px;
+    background-color: rgba(82, 82, 82, 0.63);
+    margin: 62px 0 0 0;
+    padding: 0 14px;
     overflow: scroll;
     position: absolute;
     z-index: @z-index-bookmark-results;
-    @media @medium {
-      position: fixed;
-      margin: 0;
-      margin-top: 60px;
-    }
   }
 
   .weui-cells__title {
     text-align: center;
     color: darkorange;
+    background-color: #ffffff;
+    margin: 0;
   }
 
   .search {
