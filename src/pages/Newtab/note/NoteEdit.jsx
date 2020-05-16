@@ -1,10 +1,10 @@
 import React, {useRef, useState, useEffect} from 'react';
 import noteStore from "../../../storages/NoteStore";
-import {Button} from 'react-weui';
 
 const NoteEdit = ({note, rows = null, submitButton = null, closeEdit = () => null}) => {
     const textRef = useRef();
     const [content, setContent] = useState(note.content || '');
+    const [textRows, setTextRows] = useState(2);
 
     const handleSubmitNote = () => {
         if (content.length) {
@@ -18,25 +18,28 @@ const NoteEdit = ({note, rows = null, submitButton = null, closeEdit = () => nul
         setContent(event.target.value);
     };
 
+    const handleOnKeyUp = (event) => {
+        event.target.style.height = "1px";
+        event.target.style.height = (25 + event.target.scrollHeight) + "px";
+    };
+
     useEffect(() => {
-        textRef.current.focus();
+        const height = textRef.current.scrollHeight;
+        const numberOfLines = Math.floor(height / 20);
+        setTextRows(numberOfLines);
     }, []);
 
     return (
         <>
             <textarea
+                onKeyUp={handleOnKeyUp}
                 className={'textarea-note'}
                 ref={textRef}
                 value={content}
                 onChange={handleChangeText}
                 onBlur={handleSubmitNote}
-                rows={rows || "5"}
+                rows={textRows}
             />
-            {submitButton && (
-                <div className={'align-right'}>
-                    <Button size="small" onClick={handleSubmitNote} plain>save and close</Button>
-                </div>
-            )}
         </>
     );
 };
