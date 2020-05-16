@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-const useVisible = () => {
-    const [visible, setVisible] = useState(false);
+const useVisible = (init = false) => {
+    const [visible, setVisible] = useState(init);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
 

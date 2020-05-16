@@ -3,6 +3,7 @@ import useVisible from "../../../hooks/useVisible";
 import Popup from "../../../components/Popup";
 import TimerDisplay from "./TimerDisplay";
 import {Msg} from 'react-weui';
+import AlertSetting from "./AlertSetting";
 
 const MINUTE_OPTION = [5, 10, 25];
 const Alert = () => {
@@ -16,14 +17,12 @@ const Alert = () => {
 
     return (
         <>
-            <Popup show={visible}>
+            <Popup show={visible} hide={hide}>
                 <Msg title={'Countdown'} description={'To stop the count down, just close this tab.'} type={'info'}/>
                 <TimerDisplay counterInSeconds={seconds} hidePopup={hide}/>
             </Popup>
             <div className="alert">
-                <div className="button-alert button-icon">
-                    <span className="logo-alert icon-alarm"/>
-                </div>
+                <AlertSetting startAlert={(minute) => handleOnClickMinuteButton(minute)}/>
                 {MINUTE_OPTION.map((minute) => (
                     <div key={minute} className={'button-alert'}
                          onClick={() => handleOnClickMinuteButton(minute)}>
