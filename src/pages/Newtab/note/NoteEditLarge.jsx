@@ -1,19 +1,19 @@
 import React from 'react';
-import {Button} from 'react-weui'
 import NoteEdit from "./NoteEdit";
 
-const NoteEditLarge = ({visible, note, closeEditLarge}) => {
-    return visible && note && (
+const NoteEditLarge = ({visible, editNote, closeEditLarge = () => null}) => {
+    return visible && editNote && (
         <div className={'edit-popup'}>
             <div className="edit-container with-corner with-shadow">
                 <div className="note-title">
                     Edit
                 </div>
                 <div className="note-body">
-                    <NoteEdit note={note} rows={20}/>
-                </div>
-                <div className="popup-control">
-                    <Button size={'small'} plain onClick={closeEditLarge}>close</Button>
+                    <NoteEdit 
+                        note={editNote} 
+                        rows={20} 
+                        submitButton={true} 
+                        closeEdit={(note) => closeEditLarge(note)}/>
                 </div>
             </div>
         </div>

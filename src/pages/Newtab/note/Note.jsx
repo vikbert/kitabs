@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import noteStore from '../../../storages/NoteStore';
-import NoteTextArea from "./NoteEdit";
+import NoteEdit from "./NoteEdit";
 import useVisible from "../../../hooks/useVisible";
 import NoteEditLarge from "./NoteEditLarge";
 
 const Note = () => {
     const [notes, setNotes] = useState({});
     const [editNote, setEditNote] = useState(null);
-    const {visible, show, hide} = useVisible();
+    const {visible, show, hide} = useVisible(false);
 
     const handleDeleteNote = (noteId) => {
         const cloned = {...notes};
@@ -22,6 +22,21 @@ const Note = () => {
         show();
     };
 
+    const updateNote = (note) => {
+        setNotes({...notes, [note.id]: note});
+    };
+
+    const handleCloseEdit = (note) => {
+        updateNote(note);
+        if (visible) {
+            hide();
+        }
+    };
+
+    useEffect(() => {
+        console.log('notes getting updated: ', notes);
+    }, [notes]);
+
     useEffect(() => {
         setNotes(noteStore.loadAll());
     }, []);
@@ -30,13 +45,16 @@ const Note = () => {
         <div className={'note-container fade-in'}>
             <NoteEditLarge
                 visible={visible}
-                note={editNote}
-                closeEditLarge={hide}
+                editNote={editNote}
+                closeEditLarge={handleCloseEdit}
             />
             <div className="note-grid">
                 {Object.keys(notes).map((noteKey) => (
                     <div key={noteKey} className={'edit'}>
-                        <NoteTextArea note={notes[noteKey]}/>
+                        <NoteEdit
+                            note={notes[noteKey]}
+                            closeEdit={(note) => handleCloseEdit(note)}
+                        />
                         <div className="note-edit-control">
                             <span className={'icon-x'} onClick={() => handleDeleteNote(noteKey)}/>
                             <span className={'icon-external-link'}
