@@ -1,16 +1,15 @@
 import React, {useRef, useState, useEffect} from 'react';
 import noteStore from "../../../storages/NoteStore";
 
-const NoteEdit = ({note, rows = null, submitButton = null, closeEdit = () => null}) => {
+const NoteEdit = ({note}) => {
     const textRef = useRef();
     const [content, setContent] = useState(note.content || '');
-    const [textRows, setTextRows] = useState(2);
+    const [textRows, setTextRows] = useState(3);
 
-    const handleSubmitNote = () => {
+    const handleSubmitNote = (event) => {
         if (content.length) {
-            const newNote = {...note, content: content};
-            noteStore.update(newNote);
-            closeEdit(newNote);
+            noteStore.update({...note, content: content});
+            console.log(event.target.scrollHeight);
         }
     };
 
@@ -19,8 +18,9 @@ const NoteEdit = ({note, rows = null, submitButton = null, closeEdit = () => nul
     };
 
     const handleOnKeyUp = (event) => {
-        event.target.style.height = "1px";
-        event.target.style.height = (25 + event.target.scrollHeight) + "px";
+        // todo: this code causes performance and crash in the extension
+        // event.target.style.height = "1px";
+        // event.target.style.height = (25 + event.target.scrollHeight) + "px";
     };
 
     useEffect(() => {

@@ -2,10 +2,10 @@
 .note-container {
   overflow: scroll;
   position: relative;
-  height: 664px;
+  // height: 664px;
   column-width: 320px;
   column-gap: 15px;
-  width: 90%;
+  width: 95%;
   max-width: 1100px;
   margin: 50px auto;
   @media @medium {
@@ -16,16 +16,16 @@
     text-decoration: none;
     color: #000;
     background: @note-bg;
-    //width: auto;
-    //position: relative;
-    //z-index: @z-index-note-list;
     cursor: pointer;
-    margin: 0 2px 15px;
-    padding: 15px 15px 10px 15px;
-    transition: opacity .4s ease-in-out;
+    margin: 0 0 15px 0;
+    padding: 20px 30px;
+    transition: opacity 0.4s ease-in-out;
     display: inline-block;
-    column-break-inside: avoid;
   }
+}
+
+.edit-container {
+  position: relative;
 }
 
 textarea.textarea-note {
@@ -40,92 +40,25 @@ textarea.textarea-note {
   background-color: @note-bg;
   line-height: 20px;
 }
-
-.edit-popup {
+span.close {
+  display: none;
   position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  color: #000000;
-  background-color: rgba(89, 89, 89, 0.71);
-  z-index: @z-index-note-popup;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: -15px;
+  right: -22px;
+  background-color: #6e6e6e29;
+  border-radius: 15px;
+  padding: 3px;
+  cursor: pointer;
+  color: #9a9696;
+  font-size: 20px;
 
-  .popup-control {
-    text-align: right;
-
-    button {
-      cursor: pointer;
-    }
-  }
-
-  .edit-container {
-    position: relative;
-    height: 80%;
-    width: 80%;
-    background-color: #ffc;
-    padding: 10px 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .note-title {
-      font-size: 24px;
-      color: #8e8d8d;
-    }
+  &:hover {
+    color: darkorange;
   }
 }
-
-.note-grid {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  @media only screen and (max-width: @screen-large-min) {
-    grid-template-columns: 1fr;
-  }
-  grid-template-rows: 137px;
-  overflow: scroll;
-
-
-  .note-edit-control {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    padding-left: 18px;
-
-    span {
-      cursor: pointer;
-      color: #9a9696;
-      display: none;
-      font-size: 20px;
-
-      &:hover {
-        color: darkorange;
-      }
-    }
-  }
-
-  .edit:hover {
-    span {
-      display: block;
-    }
-  }
-
-  span.close-icon {
-    display: none;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 13px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #000;
-    line-height: 7px;
-
-    &:hover {
-      color: red;
-      font-weight: 700;
-    }
+// hove: show delete icons
+.edit:hover {
+  span.close {
+    display: block;
   }
 }
