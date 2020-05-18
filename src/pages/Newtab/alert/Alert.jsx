@@ -18,7 +18,7 @@ const Alert = () => {
     return (
         <>
             <Dialog show={visible} hide={hide}>
-                <Msg title={'Countdown'} description={'To stop the count down, just close this tab.'} type={'info'}/>
+                <Msg title={'Countdown'} description={'To stop the count down, just close this popup.'} type={'info'}/>
                 <TimerDisplay counterInSeconds={seconds} hidePopup={hide}/>
             </Dialog>
             <div className="alert">

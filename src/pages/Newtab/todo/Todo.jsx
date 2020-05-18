@@ -5,6 +5,8 @@ import {Toptips} from 'react-weui';
 import TodoFactory from "./TodoFactory";
 import todoStore from "../../../storages/TodoStore";
 import TodoConfig from "./TodoConfig";
+import useVisible from "../../../hooks/useVisible";
+import Confirm from "../../../components/Confirm";
 
 const FILTER = {
     all: 'all',
@@ -28,6 +30,7 @@ const Todo = () => {
     const [newTodo, setNewTodo] = useState('');
     const [toggle, setToggle] = useState(INIT_TOGGLE);
     const [control, setControl] = useState(INIT_CONTROL);
+    const {visible, show, hide} = useVisible(false);
 
     const newTodoRef = useRef(null);
 
@@ -84,11 +87,6 @@ const Todo = () => {
     };
 
     const handleClickDeleteCompleted = () => {
-        const confirmed = window.confirm('!!! Do you want to delete all completed todos?');
-        if (!confirmed) {
-            return;
-        }
-
         setControl({...control, filter: FILTER.all});
 
         const activeTodos = {...todos};
@@ -149,6 +147,12 @@ const Todo = () => {
 
     return (
         <>
+            <Confirm
+                visible={visible}
+                hide={hide}
+                message={'Do you want to remove ALL completed todos?'}
+                confirmCallback={handleClickDeleteCompleted}
+            />
             <div className="todoapp">
                 <Toptips show={toggle.toptipActive} type={'warn'}>
                     Max. 3x starred Todos !!!
@@ -226,8 +230,9 @@ const Todo = () => {
                         </ul>
                         <ul className={'filters'}>
                             <li>
-                                <a href="#/clean-all-completed" onClick={handleClickDeleteCompleted}>Clean all
-                                    completed</a>
+                                <a href="#/clean-all-completed" onClick={show}>
+                                    Clean all completed
+                                </a>
                             </li>
                         </ul>
                     </div>
