@@ -1,11 +1,10 @@
 import React from 'react';
-import './popup.less';
 
-const Popup = ({show, hide, footer = null, children}) => {
+const Dialog = ({show, hide, footer = null, children}) => {
 
     return show && (
-        <div className="popup-wrapper">
-            <div className="popup">
+        <div className="dialog-wrapper">
+            <div className="dialog">
                 <div className="header">
                     <div className="icon-close icon-x" onClick={hide}/>
                 </div>
@@ -20,4 +19,4 @@ const Popup = ({show, hide, footer = null, children}) => {
     );
 };
 
-export default Popup;
+export default Dialog;

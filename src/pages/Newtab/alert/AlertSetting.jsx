@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import useVisible from "../../../hooks/useVisible";
-import Popup from "../../../components/Popup";
+import Dialog from "../../../components/Dialog";
 import {Button, ButtonArea} from 'react-weui';
 
 const AlertSetting = ({startAlert = () => null}) => {
@@ -14,7 +14,7 @@ const AlertSetting = ({startAlert = () => null}) => {
 
     return (
         <>
-            <Popup show={visible} hide={hide}>
+            <Dialog show={visible} hide={hide}>
                 <form onSubmit={handleSubmit} className={'alert-setting'}>
                     <input type={'number'}
                            autoFocus={true}
@@ -30,7 +30,7 @@ const AlertSetting = ({startAlert = () => null}) => {
                 <ButtonArea>
                     <Button type={'warn'} size="small" onClick={hide} plain>cancel</Button>
                 </ButtonArea>
-            </Popup>
+            </Dialog>
             <div className="button-alert button-icon" onClick={() => show()}>
                 <span className="logo-alert icon-alarm"/>
             </div>

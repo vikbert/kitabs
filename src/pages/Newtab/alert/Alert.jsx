@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import useVisible from "../../../hooks/useVisible";
-import Popup from "../../../components/Popup";
+import Dialog from "../../../components/Dialog";
 import TimerDisplay from "./TimerDisplay";
 import {Msg} from 'react-weui';
 import AlertSetting from "./AlertSetting";
@@ -17,10 +17,10 @@ const Alert = () => {
 
     return (
         <>
-            <Popup show={visible} hide={hide}>
+            <Dialog show={visible} hide={hide}>
                 <Msg title={'Countdown'} description={'To stop the count down, just close this tab.'} type={'info'}/>
                 <TimerDisplay counterInSeconds={seconds} hidePopup={hide}/>
-            </Popup>
+            </Dialog>
             <div className="alert">
                 <AlertSetting startAlert={(minute) => handleOnClickMinuteButton(minute)}/>
                 {MINUTE_OPTION.map((minute) => (
