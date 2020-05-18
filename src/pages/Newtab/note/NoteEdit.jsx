@@ -9,18 +9,11 @@ const NoteEdit = ({note}) => {
     const handleSubmitNote = (event) => {
         if (content.length) {
             noteStore.update({...note, content: content});
-            console.log(event.target.scrollHeight);
         }
     };
 
     const handleChangeText = (event) => {
         setContent(event.target.value);
-    };
-
-    const handleOnKeyUp = (event) => {
-        // todo: this code causes performance and crash in the extension
-        // event.target.style.height = "1px";
-        // event.target.style.height = (25 + event.target.scrollHeight) + "px";
     };
 
     useEffect(() => {
@@ -30,17 +23,14 @@ const NoteEdit = ({note}) => {
     }, []);
 
     return (
-        <>
-            <textarea
-                onKeyUp={handleOnKeyUp}
-                className={'textarea-note'}
-                ref={textRef}
-                value={content}
-                onChange={handleChangeText}
-                onBlur={handleSubmitNote}
-                rows={textRows}
-            />
-        </>
+        <textarea
+            className={'textarea-note'}
+            ref={textRef}
+            value={content}
+            onChange={handleChangeText}
+            onBlur={handleSubmitNote}
+            rows={textRows}
+        />
     );
 };
 
