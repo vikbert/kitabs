@@ -17,9 +17,8 @@ const NoteEdit = ({note}) => {
     };
 
     useEffect(() => {
-        const height = textRef.current.scrollHeight;
-        const numberOfLines = Math.floor(height / 20);
-        setTextRows(numberOfLines);
+        const rowsOfTextArea = Math.floor(textRef.current.scrollHeight / 20);
+        setTextRows(rowsOfTextArea);
     }, []);
 
     return (
